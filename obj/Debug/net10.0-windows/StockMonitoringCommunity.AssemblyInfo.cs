@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StockMonitoringCommunity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4109663a8f48fd867330052ad3c47425a280cf94")]
 [assembly: System.Reflection.AssemblyProductAttribute("StockMonitoringCommunity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StockMonitoringCommunity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

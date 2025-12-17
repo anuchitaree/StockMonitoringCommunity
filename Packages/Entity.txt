@@ -1,0 +1,38 @@
+﻿dotnet add package Microsoft.EntityFrameworkCore --version 10.0.1
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 10.0.1
+dotnet add package Microsoft.EntityFrameworkCore.Relational --version 10.0.1
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 10.0.1
+
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.0
+
+
+
+
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+กรณี modify DB
+1.แก้ไข model
+2.dotnet ef migrations add AddStockAndIsActiveToProduct
+3.dotnet ef database update
+
+กรณีแก้ไข model property name  ให้แก้มือเอาเอง
+
+
+ถอยกลับได้เฉพาะ migration ที่เคยสร้างไว้
+1.ดู Migration ทั้งหมด
+dotnet ef migrations list
+result
+	InitialCreate
+	AddStockAndIsActiveToProduct
+	AddCategory
+2.ถอยกลับไป Migration ที่ต้องการ
+
+dotnet ef database update AddStockAndIsActiveToProduct
+
+ลบทุก Table (กลับเป็น DB ว่าง)
+dotnet ef database update 0
+
+3: ถอย Migration File (ใน Code)
+ใช้ เฉพาะกรณียังไม่ deploy
+dotnet ef migrations remove
