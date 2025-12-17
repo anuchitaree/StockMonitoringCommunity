@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SubForm\AccountUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\ComportUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\ConnectServerUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\InputMonitorUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SubForm\LoginUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\NotificationUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\QrPatternUserForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
