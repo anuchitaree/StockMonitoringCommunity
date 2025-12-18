@@ -6,9 +6,17 @@ using System.Text;
 
 namespace StockMonitoringCommunity.Data
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public DbSet<Product> Products => Set<Product>();
+        //public DbSet<Product> Products => Set<Product>();
+
+        public DbSet<Comport> Comports  => Set<Comport>();
+        public DbSet<InputPattern> InputPatterns => Set<InputPattern>();
+
+
+
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

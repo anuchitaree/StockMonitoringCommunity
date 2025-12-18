@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StockMonitoringCommunity.Data;
+using StockMonitoringCommunity.SubForm;
 
 namespace StockMonitoringCommunity
 {
@@ -20,7 +21,13 @@ namespace StockMonitoringCommunity
             }
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            //using (var login = new LoginForm())
+            //{
+            //    if (login.ShowDialog() == DialogResult.OK)
+            //    {
+                    Application.Run(new MainForm());
+            //    }
+            //}
         }
     }
 }

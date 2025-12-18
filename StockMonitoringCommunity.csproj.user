@@ -25,7 +25,7 @@
     <Compile Update="SubForm\NotificationUserForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="SubForm\QrPatternUserForm.cs">
+    <Compile Update="SubForm\InputPatternUserForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
