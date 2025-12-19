@@ -62,6 +62,8 @@
             txtLastedit = new TextBox();
             cmbPatt4 = new ComboBox();
             cmbPatt5 = new ComboBox();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -90,8 +92,6 @@
             cmbCom.Name = "cmbCom";
             cmbCom.Size = new Size(121, 23);
             cmbCom.TabIndex = 1;
-            cmbCom.SelectedIndexChanged += cmbCom_SelectedIndexChanged;
-            cmbCom.MouseDown += cmbCom_MouseDown;
             // 
             // label3
             // 
@@ -374,10 +374,22 @@
             cmbPatt5.Size = new Size(130, 23);
             cmbPatt5.TabIndex = 1;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 344);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.Size = new Size(831, 278);
+            dataGridView1.TabIndex = 4;
+            // 
             // ComportUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dataGridView1);
             Controls.Add(txtLastedit);
             Controls.Add(btnSave);
             Controls.Add(btnReset);
@@ -413,8 +425,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "ComportUserForm";
-            Size = new Size(534, 387);
+            Size = new Size(941, 666);
             Load += ComportUserForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -460,5 +473,6 @@
         private TextBox txtLastedit;
         private ComboBox cmbPatt4;
         private ComboBox cmbPatt5;
+        private DataGridView dataGridView1;
     }
 }

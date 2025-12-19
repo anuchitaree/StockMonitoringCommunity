@@ -1,4 +1,6 @@
-﻿namespace StockMonitoringCommunity.SubForm
+﻿using StockMonitoringCommunity.Services;
+
+namespace StockMonitoringCommunity.SubForm
 {
     partial class InputPatternUserForm
     {
@@ -17,6 +19,7 @@
             {
                 components.Dispose();
             }
+            UiEventBus.MessagePublished -= OnMessage;
             base.Dispose(disposing);
         }
 
@@ -55,6 +58,7 @@
             btnUnqTxt = new Button();
             btnSave = new Button();
             btnCheck = new Button();
+            chkbPattern = new CheckBox();
             SuspendLayout();
             // 
             // label1
@@ -132,7 +136,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(23, 265);
+            label9.Location = new Point(147, 259);
             label9.Name = "label9";
             label9.Size = new Size(117, 15);
             label9.TabIndex = 0;
@@ -208,7 +212,7 @@
             // 
             // TbUq
             // 
-            TbUq.Location = new Point(146, 262);
+            TbUq.Location = new Point(270, 256);
             TbUq.Name = "TbUq";
             TbUq.Size = new Size(74, 23);
             TbUq.TabIndex = 2;
@@ -217,7 +221,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(24, 289);
+            label10.Location = new Point(148, 283);
             label10.Name = "label10";
             label10.Size = new Size(67, 15);
             label10.TabIndex = 0;
@@ -262,7 +266,7 @@
             // 
             // btnUnqStart
             // 
-            btnUnqStart.Location = new Point(226, 262);
+            btnUnqStart.Location = new Point(350, 256);
             btnUnqStart.Name = "btnUnqStart";
             btnUnqStart.Size = new Size(48, 23);
             btnUnqStart.TabIndex = 3;
@@ -272,7 +276,7 @@
             // 
             // btnUnqTxt
             // 
-            btnUnqTxt.Location = new Point(226, 291);
+            btnUnqTxt.Location = new Point(350, 285);
             btnUnqTxt.Name = "btnUnqTxt";
             btnUnqTxt.Size = new Size(48, 23);
             btnUnqTxt.TabIndex = 3;
@@ -282,7 +286,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(318, 234);
+            btnSave.Location = new Point(363, 148);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(70, 57);
             btnSave.TabIndex = 3;
@@ -300,10 +304,21 @@
             btnCheck.UseVisualStyleBackColor = true;
             btnCheck.Click += btnCheck_Click;
             // 
+            // chkbPattern
+            // 
+            chkbPattern.AutoSize = true;
+            chkbPattern.Location = new Point(43, 259);
+            chkbPattern.Name = "chkbPattern";
+            chkbPattern.Size = new Size(98, 19);
+            chkbPattern.TabIndex = 5;
+            chkbPattern.Text = "Pattern check";
+            chkbPattern.UseVisualStyleBackColor = true;
+            // 
             // InputPatternUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(chkbPattern);
             Controls.Add(btnCheck);
             Controls.Add(btnSave);
             Controls.Add(btnUnqTxt);
@@ -332,7 +347,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "InputPatternUserForm";
-            Size = new Size(417, 341);
+            Size = new Size(462, 400);
             Load += InputPatternUserForm_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -367,5 +382,6 @@
         private Button btnUnqStart;
         private Button btnUnqTxt;
         private Button btnSave;
+        private CheckBox chkbPattern;
     }
 }

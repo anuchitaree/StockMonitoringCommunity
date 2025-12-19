@@ -1,20 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StockMonitoringCommunity.Classes;
 using StockMonitoringCommunity.Data;
 using StockMonitoringCommunity.Interfaces;
 using StockMonitoringCommunity.Models;
+using StockMonitoringCommunity.Services;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace StockMonitoringCommunity.SubForm
 {
     public partial class ComportUserForm : UserControl
     {
-        //private string? Comport_name;
-
+        private bool _formLoaded = false;
+        private BindingList<ScanList> scanLists = new();
+        private int rowIndex = 0;
         public ComportUserForm()
         {
             InitializeComponent();
-
-            StateHub.OnChanged += StateHub_OnChanged;
         }
         int channel_number;
         public void SetData(int Channel)
@@ -22,29 +28,69 @@ namespace StockMonitoringCommunity.SubForm
             channel_number = Channel;
         }
 
-        private void StateHub_OnChanged(string key, object value)
-        {
-
-            if (key == "Portsetting_ch1")
-            {
-                if (InvokeRequired)
-                {
-                    //BeginInvoke(new Action(() => TbScan.Text = value.ToString()));
-                }
-                else
-                {
-                    //TbScan.Text = TbScan.Text = value.ToString();
-                }
-            }
-        }
 
         private void ComportUserForm_Load(object sender, EventArgs e)
         {
             COMPort();
-            //lbname.Text = string.Format("Channel {0} Setup", channel_number);
-            string[] head = new string[] { "last scan", "direction", "Message" };
-            int[] width = new int[] { 100, 50, 400 };
-            //InitialDatagridview.Pattern_1(head, width, dataGridView1);
+            LoadSettingfile(1);
+            string[] head = new string[] { "Id", "Channel", "Raw", "Partnumber", "Timestamp" };
+            int[] width = new int[] { 50, 50, 300,200,200 };
+            InitialDatagridview.Pattern_1(head, width, dataGridView1);
+            UiEventBus.MessagePublished += OnMessage;
+            scanLists.Clear();
+
+            dataGridView1.DataSource = scanLists;
+            _formLoaded = true;
+        }
+        private void OnMessage(UiMessage msg)
+        {
+            switch (msg.Key)
+            {
+                case "COMPORT_UC_CH1_RAW":
+
+                    var ch = msg.MoreExtraData?.ToString()!;
+                   var raw = msg.Data?.ToString()!;
+                    var partnumber = msg.ExtraData?.ToString()!;
+                    var item = new ScanList
+                    {
+                        Id = rowIndex++,
+                        Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                        Channel = ch.ToString(),
+                        Raw = raw,
+                        Partnumber = partnumber
+                    };
+
+                    if (InvokeRequired)
+                    {
+                        Invoke(() => scanLists.Insert(0,item));
+                    }
+                    else
+                    {
+                        scanLists.Insert(0,item);
+                    }
+
+                    break;
+              
+                default:
+                    break;
+
+            }
+
+
+        }
+
+        private void addlist(string raw,string partnumber,string ch)
+        {
+            scanLists.Add(new ScanList
+            {
+                Id = rowIndex++,
+                Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                Channel = ch.ToString(),
+                Raw = raw,
+                Partnumber = partnumber
+            });
+            dataGridView1.DataSource = scanLists;
+
         }
         private void COMPort()
         {
@@ -63,7 +109,7 @@ namespace StockMonitoringCommunity.SubForm
             string[] stopbit = new string[] { "1", "1.5", "2" };
             string[] direction = new string[] { "IN", "OUT" };
             string[] handshake = new string[] { "None", "XOnXOff", "RequestToSend", "RequestToSendXOnXOff" };
-            string[] enable = new string[] { "Enable", "Disable" };
+            string[] enable = new string[] { "Disable", "Enable" };
             cmbBaudrate.DataSource = baudrate;
             cmbParity.DataSource = parity;
             cmbLength.DataSource = lenght;
@@ -94,35 +140,36 @@ namespace StockMonitoringCommunity.SubForm
                     cmbLength.SelectedItem = setting.DataBits;
                     cmbStop.SelectedItem = setting.Stopbit;
                     cmbInput.SelectedItem = setting.Direction;
+
                     cmbHand.SelectedItem = setting.Handshake;
                     cmbPatt1.SelectedItem = setting.Pattern1;
                     cmbPatt2.SelectedItem = setting.Pattern2;
                     cmbPatt3.SelectedItem = setting.Pattern3;
-                    cmbPatt4.SelectedItem = setting.Pattern1;
-                    cmbPatt5.SelectedItem = setting.Pattern2;
-                    cmbPatt6.SelectedItem = setting.Pattern3;
+                    cmbPatt4.SelectedItem = setting.Pattern4;
+                    cmbPatt5.SelectedItem = setting.Pattern5;
+                    cmbPatt6.SelectedItem = setting.Pattern6;
 
-                    cmbEnable.SelectedItem = setting.Enable == true ? 0 : 1;
+                    cmbEnable.SelectedItem = setting.Enable == true ? "Enable" : "Disable";
                     txtLastedit.Text = (setting.CreatedAt).ToString("yyyy-MM-dd HH:mm:ss");
                     label1.BackColor = System.Drawing.Color.LightGreen;
                 }
                 else
                 {
                     label1.BackColor = System.Drawing.Color.LightCoral;
-                    cmbCom.SelectedIndex = 0;
-                    cmbBaudrate.SelectedIndex = 0;
-                    cmbParity.SelectedIndex = 0;
-                    cmbLength.SelectedIndex = 0;
-                    cmbStop.SelectedIndex = 0;
-                    cmbInput.SelectedIndex = 0;
-
-                    cmbPatt1.SelectedIndex = 0;
-                    cmbPatt2.SelectedIndex = 0;
-                    cmbPatt3.SelectedIndex = 0;
-                    cmbPatt4.SelectedIndex = 0;
-                    cmbPatt5.SelectedIndex = 0;
-                    cmbPatt6.SelectedIndex = 0;
-                    cmbEnable.SelectedIndex = 0;
+                    cmbCom.SelectedIndex = -1;
+                    cmbBaudrate.SelectedIndex = -1;
+                    cmbParity.SelectedIndex = -1;
+                    cmbLength.SelectedIndex = -1;
+                    cmbStop.SelectedIndex = -1;
+                    cmbInput.SelectedIndex = -1;
+                    cmbHand.SelectedIndex = -1;
+                    cmbPatt1.SelectedIndex = -1;
+                    cmbPatt2.SelectedIndex = -1;
+                    cmbPatt3.SelectedIndex = -1;
+                    cmbPatt4.SelectedIndex = -1;
+                    cmbPatt5.SelectedIndex = -1;
+                    cmbPatt6.SelectedIndex = -1;
+                    cmbEnable.SelectedIndex = -1;
                     txtLastedit.Text = null;
                 }
             }
@@ -141,13 +188,25 @@ namespace StockMonitoringCommunity.SubForm
                 };
 
                 var channel_ID = int.Parse(cmbCh.SelectedItem!.ToString()!);
+                var port_name = cmbCom.SelectedItem!.ToString()!;
 
                 using (var db = new AppDbContext())
                 {
+
+                    var com_check = db.Comports.Where(x => x.PortName == port_name).ToList();
+                    if (com_check.Count > 0)
+                    {
+                        if (com_check[0].Channel_ID != channel_ID)
+                        {
+                            MessageBox.Show("This COM port is already in use. Please select another COM port.", "information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
                     var comport = new Comport()
                     {
                         Channel_ID = channel_ID,
-                        PortName = cmbCom.SelectedItem!.ToString()!,
+                        PortName = port_name,
                         Baudrate = cmbBaudrate.SelectedItem!.ToString()!,
                         DataBits = cmbLength.SelectedItem!.ToString()!,
                         Stopbit = cmbStop.SelectedItem!.ToString()!,
@@ -191,14 +250,14 @@ namespace StockMonitoringCommunity.SubForm
                     }
 
                 }
+                UiEventBus.Publish("MAIN_FORM_CH1_RESET", channel_ID);
                 MessageBox.Show("Save setting completed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                StateHub.Raise("Postsetting", channel_number);
+                //StateHub.Raise("Postsetting", channel_number);
 
             }
             catch (Exception ex)
             {
-
                 var logger = ex.Message;
                 MessageBox.Show("Save setting error", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -213,25 +272,13 @@ namespace StockMonitoringCommunity.SubForm
 
         private void cmbCh_TextChanged(object sender, EventArgs e)
         {
+            if (!_formLoaded)
+                return;
             LoadSettingfile(int.Parse(cmbCh.SelectedItem!.ToString()!));
         }
 
-        private void cmbCom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //using (var db = new AppDbContext())
-            //{
-            //    var comp = db.Comports.Where(x => x.PortName == cmbCom.Text).ToList();
-            //    if (comp.Count > 0)
-            //    {
-            //        cmbCom.Text = Comport_name;
-            //        MessageBox.Show("This COM port is already in use. Please select another COM port.","information",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            //    }
-            //}
-        }
 
-        private void cmbCom_MouseDown(object sender, MouseEventArgs e)
-        {
-            //Comport_name = cmbCom.Text;
-        }
+
+
     }
 }

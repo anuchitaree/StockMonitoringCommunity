@@ -18,6 +18,7 @@ namespace StockMonitoringCommunity.Classes
             for (int i = 0; i < col_head.Length; i++) 
             {
                 dataGridView2.Columns[i].Name = col_head[i];
+                dataGridView2.Columns[i].DataPropertyName = col_head[i];
                 dataGridView2.Columns[i].Width = col_width[i];
                 dataGridView2.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }

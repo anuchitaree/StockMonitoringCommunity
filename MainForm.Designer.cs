@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -53,12 +52,6 @@
             button2 = new Button();
             textBox1 = new TextBox();
             button1 = new Button();
-            timer1 = new System.Windows.Forms.Timer(components);
-            timer2 = new System.Windows.Forms.Timer(components);
-            timer3 = new System.Windows.Forms.Timer(components);
-            timer4 = new System.Windows.Forms.Timer(components);
-            timer5 = new System.Windows.Forms.Timer(components);
-            timer6 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -69,7 +62,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, settingToolStripMenuItem, utilityToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(772, 24);
+            menuStrip1.Size = new Size(1414, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -131,8 +124,8 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.217617F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.78239F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.265913F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 83.7340851F));
             tableLayoutPanel1.Controls.Add(panelMain, 1, 1);
             tableLayoutPanel1.Controls.Add(panel2, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
@@ -141,15 +134,15 @@
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 4.044944F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 95.9550552F));
-            tableLayoutPanel1.Size = new Size(772, 445);
+            tableLayoutPanel1.Size = new Size(1414, 630);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // panelMain
             // 
             panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(244, 21);
+            panelMain.Location = new Point(233, 28);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(525, 421);
+            panelMain.Size = new Size(1178, 599);
             panelMain.TabIndex = 0;
             // 
             // panel2
@@ -167,9 +160,9 @@
             panel2.Controls.Add(textBox1);
             panel2.Controls.Add(button1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(3, 21);
+            panel2.Location = new Point(3, 28);
             panel2.Name = "panel2";
-            panel2.Size = new Size(235, 421);
+            panel2.Size = new Size(224, 599);
             panel2.TabIndex = 1;
             // 
             // textBox6
@@ -272,12 +265,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 469);
+            ClientSize = new Size(1414, 654);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Stock monitoring [ free version ]";
+            FormClosed += MainForm_FormClosed;
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -314,11 +308,5 @@
         private TextBox textBox2;
         private Button button2;
         private TextBox textBox1;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Timer timer3;
-        private System.Windows.Forms.Timer timer4;
-        private System.Windows.Forms.Timer timer5;
-        private System.Windows.Forms.Timer timer6;
     }
 }

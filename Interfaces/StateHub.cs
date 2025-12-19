@@ -8,7 +8,7 @@ namespace StockMonitoringCommunity.Interfaces
 {
     public  static class StateHub
     {
-        public static event Action<string, object> OnChanged;
+        public static event Action<string, object>? OnChanged;
 
         public static void Raise(string key, object value)
         {

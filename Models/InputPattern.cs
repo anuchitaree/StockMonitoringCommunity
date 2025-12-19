@@ -29,6 +29,7 @@ namespace StockMonitoringCommunity.Models
         [StringLength(255)]
         public string? ExampleText { get; set; }
 
+        public bool PatternCheck { get; set; } = false;
         public int UniqueStart { get; set; }
 
         public string? UniqueText { get; set; }

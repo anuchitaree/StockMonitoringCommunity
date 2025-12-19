@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockMonitoringCommunity.Data;
 using StockMonitoringCommunity.Models;
+using StockMonitoringCommunity.Services;
 using System.Data;
 
 namespace StockMonitoringCommunity.SubForm
 {
     public partial class InputPatternUserForm : UserControl
     {
+        private bool _formLoaded = false;
+
         public InputPatternUserForm()
         {
             InitializeComponent();
@@ -16,8 +19,32 @@ namespace StockMonitoringCommunity.SubForm
         {
             cmbPatt.DataSource = Enumerable.Range(1, 6).ToList();
             Loaddata(1);
+            UiEventBus.MessagePublished += OnMessage;
+            _formLoaded = true;
+        }
+        private void OnMessage(UiMessage msg)
+        {
+            switch (msg.Key)
+            {
+                case "MAIN_FORM_CH1_RAW":
+                    if (InvokeRequired)
+                    {
+                        Invoke(new Action(() => TbScan.Text = msg.Data?.ToString()));
+                    }
+                    else
+                    {
+                        TbScan.Text = msg.Data?.ToString();
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
 
         }
+
+
 
         private async void Loaddata(int channel)
         {
@@ -59,16 +86,29 @@ namespace StockMonitoringCommunity.SubForm
 
         private void cmbPatt_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!_formLoaded)
+                return;
             Loaddata(int.Parse(cmbPatt.Text));
         }
 
         private void btnGetStart_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(TbScan.Text))
+            {
+                MessageBox.Show("Please input raw message", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             TbStart.Text = TbScan.SelectionStart.ToString();
         }
 
         private void btnEndPos_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(TbScan.Text))
+            {
+                MessageBox.Show("Please input raw message", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int pos = TbScan.SelectionStart;
             TbEnd.Text = pos.ToString();
             TbNumber.Text = (pos - int.Parse(TbStart.Text)).ToString();
@@ -76,16 +116,31 @@ namespace StockMonitoringCommunity.SubForm
 
         private void btnTotal_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(TbScan.Text))
+            {
+                MessageBox.Show("Please input raw message", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             TbTotal.Text = TbScan.SelectionStart.ToString();
         }
 
         private void btnUnqStart_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(TbScan.Text))
+            {
+                MessageBox.Show("Please input raw message", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             TbUq.Text = TbScan.SelectionStart.ToString();
         }
 
         private void btnUnqTxt_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(TbScan.Text))
+            {
+                MessageBox.Show("Please input raw message", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             int start = int.Parse(TbUq.Text);
             int pos = TbScan.SelectionStart;
 
@@ -94,17 +149,18 @@ namespace StockMonitoringCommunity.SubForm
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(TbScan.Text))
+            {
+                MessageBox.Show("Please input raw message", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var starttext = int.Parse(TbStart.Text);
             var nuberofcharactor = int.Parse(TbNumber.Text);
 
             TbResult.Text = TbScan.Text.Substring(starttext, nuberofcharactor);
         }
 
-        private async void button7_Click(object sender, EventArgs e)
-        {
 
-
-        }
 
         private async void SaveSetting()
         {
@@ -115,16 +171,19 @@ namespace StockMonitoringCommunity.SubForm
                 {
                     var pattern_no = int.Parse(cmbPatt.SelectedItem!.ToString()!);
 
+
+                    TbUq.Text = chkbPattern.Checked==false? "0":TbUq.Text;
+
                     var qr = new InputPattern()
                     {
                         Pattern_ID = pattern_no,
-                        TotalOfCharactor = Convert.ToInt32(TbTotal.Text),
-                        StartCharactor = Convert.ToInt32(TbStart.Text),
-                        NumberOfCharactor = Convert.ToInt32(TbNumber.Text),
-                        ExampleText = TbScan.Text,
-                        Result = TbResult.Text,
+                        TotalOfCharactor = int.Parse(TbTotal.Text),
+                        StartCharactor = int.Parse(TbStart.Text),
+                        NumberOfCharactor = int.Parse(TbNumber.Text),
+                        ExampleText = TbScan.Text==null? "":TbScan.Text,
+                        Result = TbResult.Text == null ? "" : TbResult.Text,
                         UniqueStart = int.Parse(TbUq.Text),
-                        UniqueText = TbUnqTxt.Text
+                        UniqueText = TbUnqTxt.Text==null?"": TbUnqTxt.Text
                     };
 
                     var ptn = await db.InputPatterns.Where(x => x.Pattern_ID == pattern_no).FirstOrDefaultAsync();
@@ -147,9 +206,9 @@ namespace StockMonitoringCommunity.SubForm
                 }
                 MessageBox.Show("Save data pattern completed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                var msg =ex.Message;
                 MessageBox.Show("Save data pattern error", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
