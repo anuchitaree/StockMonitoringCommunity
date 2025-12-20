@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StockMonitoringCommunity.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,12 +8,17 @@ namespace StockMonitoringCommunity.Data
     public class AppDbContext : DbContext
     {
         //public DbSet<Product> Products => Set<Product>();
+        //public AppDbContext(DbContextOptions<AppDbContext> options)
+        //: base(options)
+        //{
+        //}
+
 
         public DbSet<Comport> Comports  => Set<Comport>();
         public DbSet<InputPattern> InputPatterns => Set<InputPattern>();
+        public DbSet<ScanInOutTransaction> ScanInOutTransactions => Set<ScanInOutTransaction>();
 
-
-
+       
 
 
 

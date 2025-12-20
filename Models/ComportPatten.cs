@@ -8,6 +8,8 @@ namespace StockMonitoringCommunity.Models
     {
         public int Channel_ID { get; set; }
 
+        public string? Direction { get; set; }
+
         public string? Setting { get; set; }
         public int Pattern1 { get; set; }
         public int Pattern2 { get; set; }

@@ -22,7 +22,7 @@ namespace StockMonitoringCommunity.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("StockMonitoringCommunity.Models.Comport", b =>
+            modelBuilder.Entity("StockMonitoringCommunity.Data.Comport", b =>
                 {
                     b.Property<int>("Channel_ID")
                         .HasColumnType("integer");
@@ -91,7 +91,7 @@ namespace StockMonitoringCommunity.Migrations
                     b.ToTable("Comports");
                 });
 
-            modelBuilder.Entity("StockMonitoringCommunity.Models.InputPattern", b =>
+            modelBuilder.Entity("StockMonitoringCommunity.Data.InputPattern", b =>
                 {
                     b.Property<int>("Pattern_ID")
                         .HasColumnType("integer");
@@ -125,6 +125,37 @@ namespace StockMonitoringCommunity.Migrations
                     b.HasKey("Pattern_ID");
 
                     b.ToTable("InputPatterns");
+                });
+
+            modelBuilder.Entity("StockMonitoringCommunity.Data.ScanInOutTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Channel")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Direction")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Partnumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Raw")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ScanInOutTransactions");
                 });
 #pragma warning restore 612, 618
         }

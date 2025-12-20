@@ -17,7 +17,7 @@ namespace StockMonitoringCommunity.SubForm
     {
         private bool _formLoaded = false;
         private BindingList<ScanList> scanLists = new();
-        private int rowIndex = 0;
+        private int rowIndex = 1;
         public ComportUserForm()
         {
             InitializeComponent();
@@ -33,9 +33,10 @@ namespace StockMonitoringCommunity.SubForm
         {
             COMPort();
             LoadSettingfile(1);
-            string[] head = new string[] { "Id", "Channel", "Raw", "Partnumber", "Timestamp" };
-            int[] width = new int[] { 50, 50, 300,200,200 };
-            InitialDatagridview.Pattern_1(head, width, dataGridView1);
+            string[] head = new string[] { "No", "CH",  "Part number", "Timestamp" ,"Raw" };
+            string[] property = new string[] { "Id", "Channel", "Partnumber", "Timestamp", "Raw" };
+            int[] width = new int[] { 30, 30, 150,150,800 };
+            InitialDatagridview.Pattern_1(head, property, width, dataGridView1);
             UiEventBus.MessagePublished += OnMessage;
             scanLists.Clear();
 
@@ -213,12 +214,12 @@ namespace StockMonitoringCommunity.SubForm
                         Parity = cmbParity.SelectedItem!.ToString()!,
                         Handshake = cmbHand.SelectedItem!.ToString()!,
                         Direction = cmbInput.SelectedItem!.ToString()!,
-                        Pattern1 = int.Parse(cmbPatt1.SelectedItem!.ToString()!),
-                        Pattern2 = int.Parse(cmbPatt2.SelectedItem!.ToString()!),
-                        Pattern3 = int.Parse(cmbPatt3.SelectedItem!.ToString()!),
-                        Pattern4 = int.Parse(cmbPatt4.SelectedItem!.ToString()!),
-                        Pattern5 = int.Parse(cmbPatt5.SelectedItem!.ToString()!),
-                        Pattern6 = int.Parse(cmbPatt6.SelectedItem!.ToString()!),
+                        Pattern1 = int.Parse(cmbPatt1.SelectedIndex==-1? "0": cmbPatt1.SelectedItem!.ToString()!),
+                        Pattern2 = int.Parse(cmbPatt2.SelectedIndex == -1 ? "0" : cmbPatt2.SelectedItem!.ToString()!),
+                        Pattern3 = int.Parse(cmbPatt3.SelectedIndex == -1 ? "0" : cmbPatt3.SelectedItem!.ToString()!),
+                        Pattern4 = int.Parse(cmbPatt4.SelectedIndex == -1 ? "0" : cmbPatt4.SelectedItem!.ToString()!),
+                        Pattern5 = int.Parse(cmbPatt5.SelectedIndex == -1 ? "0" : cmbPatt5.SelectedItem!.ToString()!),
+                        Pattern6 = int.Parse(cmbPatt6.SelectedIndex == -1 ? "0" : cmbPatt6.SelectedItem!.ToString()!),
                         Enable = map[cmbEnable.Text],
                         CreatedAt = DateTime.UtcNow,
                     };

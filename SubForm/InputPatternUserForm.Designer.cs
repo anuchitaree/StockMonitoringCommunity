@@ -17,9 +17,10 @@ namespace StockMonitoringCommunity.SubForm
         {
             if (disposing && (components != null))
             {
+            UiEventBus.MessagePublished -= OnMessage;
+
                 components.Dispose();
             }
-            UiEventBus.MessagePublished -= OnMessage;
             base.Dispose(disposing);
         }
 

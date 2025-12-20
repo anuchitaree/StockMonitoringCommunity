@@ -28,10 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            SuspendLayout();
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(84, 98);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(622, 180);
+            dataGridView1.TabIndex = 0;
+            // 
+            // AccountUserForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dataGridView1);
+            Name = "AccountUserForm";
+            Size = new Size(809, 391);
+            Load += AccountUserForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dataGridView1;
     }
 }

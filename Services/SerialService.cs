@@ -1,6 +1,6 @@
 ﻿using StockMonitoringCommunity.Classes;
+using StockMonitoringCommunity.Data;
 using StockMonitoringCommunity.Interfaces;
-using StockMonitoringCommunity.Models;
 using System.IO.Ports;
 using System.Text;
 
@@ -24,7 +24,7 @@ namespace StockMonitoringCommunity.Services
 
 
 
-
+        #region Initialization Serial Port
 
         public async static void OpenPort1(Comport comp)
         {
@@ -383,7 +383,7 @@ namespace StockMonitoringCommunity.Services
 
         }
 
-
+        #endregion
 
         private static void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
         {
@@ -391,35 +391,43 @@ namespace StockMonitoringCommunity.Services
             var ReadingText = serialPort1.ReadExisting();   // อ่านเฉพาะที่มีอยู่ตอนนั้น
             buffer1.Append(ReadingText);
             string result = buffer1.ToString();
-            if (buffer1.ToString().EndsWith("\r")) // && buffer1.Length >= Parameter.Patterns.Length) // || buffer.ToString().EndsWith("\r\n")) 
+            if (buffer1.ToString().EndsWith("\r")) 
             {
                 string result_clean = buffer1.ToString().Trim();
                 var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-                string text_part="";
-                if (ch != null)
-                {
-                    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                    if (pt1 != null)
-                    {
-                         text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
-                    }
-                    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                    if (pt2 != null && ch.Pattern1 == 0)
-                    {
-                         text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
-                    }
-                    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0)
-                    {
-                        text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
-                    }
-                }
+
+                string text_part = "";
+                var direction = ch != null ? ch.Direction : "";
+
+                //UiEventBus.PublishTransaction("COMPORT_UC_CH1_RAW", 1, direction, result_clean, "");
+
+                UiEventBus.PublishTransaction(UiKeys.TransactionAdd, 1, direction, result_clean, "");
+
+                //if (ch != null)
+                //{
+                //    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
+                //    if (pt1 != null && result_clean.Length >= pt1.TotalOfCharactor)
+                //    {
+                //        text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
+                //        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
+                //        UiEventBus.PublishTransaction("COMPORT_UC_CH1_RAW", 1,ch.Direction,result_clean, text_part);
+                //    }
+
+                //    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
+                //    if (pt2 != null && ch.Pattern1 == 0 && result_clean.Length >= pt2.TotalOfCharactor)
+                //    {
+                //        text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
+                //        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
+                //    }
+                //    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
+                //    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0 && result_clean.Length >= pt3.TotalOfCharactor)
+                //    {
+                //        text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
+                //        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
+                //    }
+                //}
 
                 UiEventBus.Publish("COMPORT_UC_CH1_RAW", result_clean, text_part, 1);
-                UiEventBus.Publish("MAIN_FORM_CH1_RAW", result_clean);
                 buffer1.Clear();
                 serialPort1.DiscardInBuffer();
             }

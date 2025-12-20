@@ -1,4 +1,6 @@
-﻿namespace StockMonitoringCommunity.SubForm
+﻿using StockMonitoringCommunity.Services;
+
+namespace StockMonitoringCommunity.SubForm
 {
     partial class InputMonitorUserForm
     {
@@ -15,6 +17,7 @@
         {
             if (disposing && (components != null))
             {
+                UiEventBus.MessagePublished -= OnMessage;
                 components.Dispose();
             }
             base.Dispose(disposing);

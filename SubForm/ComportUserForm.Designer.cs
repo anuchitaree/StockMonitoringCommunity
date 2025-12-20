@@ -1,4 +1,6 @@
-﻿namespace StockMonitoringCommunity.SubForm
+﻿using StockMonitoringCommunity.Services;
+
+namespace StockMonitoringCommunity.SubForm
 {
     partial class ComportUserForm
     {
@@ -15,6 +17,8 @@
         {
             if (disposing && (components != null))
             {
+
+                UiEventBus.MessagePublished -= OnMessage;
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -378,11 +382,11 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 344);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(831, 278);
+            dataGridView1.Size = new Size(1280, 278);
             dataGridView1.TabIndex = 4;
             // 
             // ComportUserForm
@@ -425,7 +429,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "ComportUserForm";
-            Size = new Size(941, 666);
+            Size = new Size(1382, 666);
             Load += ComportUserForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);

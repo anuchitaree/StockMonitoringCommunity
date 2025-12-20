@@ -1,4 +1,5 @@
-﻿using StockMonitoringCommunity.Models;
+﻿using StockMonitoringCommunity.Data;
+using StockMonitoringCommunity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
