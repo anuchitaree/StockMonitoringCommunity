@@ -1,22 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Project\\StockMonitoringCommunity\\",
+  "WorkspaceRootPath": "D:\\Project\\StockMonitoringCommunity\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|c:\\project\\stockmonitoringcommunity\\services\\serialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\services\\stockdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:services\\stockdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\services\\uieventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:services\\uieventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\services\\serialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:services\\serialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|c:\\project\\stockmonitoringcommunity\\services\\uikeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\services\\uikeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:services\\uikeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|c:\\project\\stockmonitoringcommunity\\data\\scaninouttransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:data\\scaninouttransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|c:\\project\\stockmonitoringcommunity\\services\\stockdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:services\\stockdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\models\\uimessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:models\\uimessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\models\\uimessagetranscation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:models\\uimessagetranscation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|d:\\project\\stockmonitoringcommunity\\subform\\inputmonitoruserform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC222F4F-4FE5-E9DC-4943-8CA31E5F9EF0}|StockMonitoringCommunity.csproj|solutionrelative:subform\\inputmonitoruserform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,66 +45,117 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 260,
-          "SelectedChildIndex": 2,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ScanInOutTransaction.cs",
-              "DocumentMoniker": "C:\\Project\\StockMonitoringCommunity\\Data\\ScanInOutTransaction.cs",
-              "RelativeDocumentMoniker": "Data\\ScanInOutTransaction.cs",
-              "ToolTip": "C:\\Project\\StockMonitoringCommunity\\Data\\ScanInOutTransaction.cs",
-              "RelativeToolTip": "Data\\ScanInOutTransaction.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T09:17:19.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StockDatabase.cs",
-              "DocumentMoniker": "C:\\Project\\StockMonitoringCommunity\\Services\\StockDatabase.cs",
-              "RelativeDocumentMoniker": "Services\\StockDatabase.cs",
-              "ToolTip": "C:\\Project\\StockMonitoringCommunity\\Services\\StockDatabase.cs",
-              "RelativeToolTip": "Services\\StockDatabase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T09:15:32.085Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SerialService.cs",
-              "DocumentMoniker": "C:\\Project\\StockMonitoringCommunity\\Services\\SerialService.cs",
-              "RelativeDocumentMoniker": "Services\\SerialService.cs",
-              "ToolTip": "C:\\Project\\StockMonitoringCommunity\\Services\\SerialService.cs",
-              "RelativeToolTip": "Services\\SerialService.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAIAwwJIBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T08:22:09.161Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 260,
+          "DockedWidth": 348,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UiKeys.cs",
-              "DocumentMoniker": "C:\\Project\\StockMonitoringCommunity\\Services\\UiKeys.cs",
-              "RelativeDocumentMoniker": "Services\\UiKeys.cs",
-              "ToolTip": "C:\\Project\\StockMonitoringCommunity\\Services\\UiKeys.cs",
-              "RelativeToolTip": "Services\\UiKeys.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "StockDatabase.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Services\\StockDatabase.cs",
+              "RelativeDocumentMoniker": "Services\\StockDatabase.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Services\\StockDatabase.cs",
+              "RelativeToolTip": "Services\\StockDatabase.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAuwCEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-20T09:25:29.658Z",
+              "WhenOpened": "2025-12-22T09:13:51.05Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAgwAoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:58:58.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\MainForm.cs",
+              "RelativeToolTip": "MainForm.cs",
+              "ViewState": "AgIAAB8BAAAAAAAAAAAjwDgBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:41:10.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UiMessage.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Models\\UiMessage.cs",
+              "RelativeDocumentMoniker": "Models\\UiMessage.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Models\\UiMessage.cs",
+              "RelativeToolTip": "Models\\UiMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:39:59.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UiMessageTranscation.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Models\\UiMessageTranscation.cs",
+              "RelativeDocumentMoniker": "Models\\UiMessageTranscation.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Models\\UiMessageTranscation.cs",
+              "RelativeToolTip": "Models\\UiMessageTranscation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:38:35.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UiKeys.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Services\\UiKeys.cs",
+              "RelativeDocumentMoniker": "Services\\UiKeys.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Services\\UiKeys.cs",
+              "RelativeToolTip": "Services\\UiKeys.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:38:30.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UiEventBus.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Services\\UiEventBus.cs",
+              "RelativeDocumentMoniker": "Services\\UiEventBus.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Services\\UiEventBus.cs",
+              "RelativeToolTip": "Services\\UiEventBus.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:34:35.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "InputMonitorUserForm.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\SubForm\\InputMonitorUserForm.cs",
+              "RelativeDocumentMoniker": "SubForm\\InputMonitorUserForm.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\SubForm\\InputMonitorUserForm.cs",
+              "RelativeToolTip": "SubForm\\InputMonitorUserForm.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAgwB4AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T08:11:24.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SerialService.cs",
+              "DocumentMoniker": "D:\\Project\\StockMonitoringCommunity\\Services\\SerialService.cs",
+              "RelativeDocumentMoniker": "Services\\SerialService.cs",
+              "ToolTip": "D:\\Project\\StockMonitoringCommunity\\Services\\SerialService.cs",
+              "RelativeToolTip": "Services\\SerialService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAIAwwJEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T08:22:09.161Z"
             }
           ]
         }

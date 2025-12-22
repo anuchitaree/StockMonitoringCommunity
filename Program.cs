@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StockMonitoringCommunity.Data;
+using StockMonitoringCommunity.Services;
 using StockMonitoringCommunity.SubForm;
 
 namespace StockMonitoringCommunity
@@ -14,11 +15,13 @@ namespace StockMonitoringCommunity
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-
+            ApplicationConfiguration.Initialize();
             using (var db = new AppDbContext())
             {
                 db.Database.Migrate(); // <-- ????? / update DB ?????????
             }
+
+            var dbService = StockDatabase.Instance;
 
             ApplicationConfiguration.Initialize();
             //using (var login = new LoginForm())
@@ -28,6 +31,8 @@ namespace StockMonitoringCommunity
                     Application.Run(new MainForm());
             //    }
             //}
+
+            dbService.Dispose();
         }
     }
 }

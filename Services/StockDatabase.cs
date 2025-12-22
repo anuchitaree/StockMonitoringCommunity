@@ -1,24 +1,53 @@
 ﻿using StockMonitoringCommunity.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using StockMonitoringCommunity.Models;
 
 namespace StockMonitoringCommunity.Services
 {
-    public class StockDatabase
+    public sealed  class StockDatabase : IDisposable
     {
-        public  StockDatabase()
+        private static readonly Lazy<StockDatabase> _instance =
+         new(() => new StockDatabase());
+
+        public static StockDatabase Instance => _instance.Value;
+
+        private StockDatabase()
         {
-            // Implementation for connecting to the stock database
+            UiEventBus.MessagePublishedTranscation += OnMessageTransaction;
         }
 
-        public async void AddStock(ScanInOutTransaction data)
+        public void Dispose()
         {
-            using (var db = new AppDbContext())
+            UiEventBus.MessagePublishedTranscation -= OnMessageTransaction;
+        }
+
+       
+
+        private void OnMessageTransaction(UiMessageTranscation msg)
+        {
+            if (msg.Key != UiKeys.TransactionAdd)
+                return;
+
+            if (msg is not UiMessageTranscation p)
+                return;
+
+            Task.Run(() => SaveTransaction(p));
+        }
+
+
+        private void SaveTransaction(UiMessageTranscation p)
+        {
+            using var db = new AppDbContext();
+
+            var transaction = new ScanInOutTransaction
             {
-                await db.ScanInOutTransactions.AddAsync(data);
-                await db.SaveChangesAsync();
-            }
+                Channel = p.Channel,
+                Direction = p.Direction,
+                Raw = p.Raw!,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            db.ScanInOutTransactions.Add(transaction);
+            db.SaveChanges();
         }
 
 

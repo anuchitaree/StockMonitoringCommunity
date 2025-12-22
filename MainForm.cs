@@ -320,23 +320,23 @@ namespace StockMonitoringCommunity
                 switch (msg.Key)
                 {
                     case "COMPORT_UC_CH1_RAW": // \", result_clean, text_part, 1);"
-                        if (_isStarted)
-                        {
-                            using (var db = new AppDbContext())
-                            {
-                                var transcation = new ScanInOutTransaction
-                                {
-                                    Channel = msg.Channel,
-                                    Direction = msg.Direction,
-                                    Raw = msg.Raw,
-                                    Partnumber = msg.Partnumber,
-                                    CreatedAt = DateTime.UtcNow
-                                };
-                                db.ScanInOutTransactions.Add(transcation);
-                                db.SaveChanges();
-                            }
+                        //if (_isStarted)
+                        //{
+                        //    using (var db = new AppDbContext())
+                        //    {
+                        //        var transcation = new ScanInOutTransaction
+                        //        {
+                        //            Channel = msg.Channel,
+                        //            Direction = msg.Direction,
+                        //            Raw = msg.Raw,
+                        //            Partnumber = msg.Partnumber,
+                        //            CreatedAt = DateTime.UtcNow
+                        //        };
+                        //        db.ScanInOutTransactions.Add(transcation);
+                        //        db.SaveChanges();
+                        //    }
 
-                        }
+                        //}
                         break;
                     default:
                         break;
@@ -375,6 +375,7 @@ namespace StockMonitoringCommunity
         {
             UiEventBus.MessagePublished -= OnMessage;
             StateStore.StateChanged -= OnStateChanged;
+
 
             base.OnFormClosed(e); // ✅ ถูกที่ ถูกเวลา
         }

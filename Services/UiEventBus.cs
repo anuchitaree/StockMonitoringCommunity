@@ -22,7 +22,7 @@ namespace StockMonitoringCommunity.Services
             });
         }
 
-        public static void PublishTransaction(string key, int channel, string? direction, string? raw,string? partnumber)
+        public static void PublishTransaction(string key, int channel, string? direction, string? raw)
         {
             MessagePublishedTranscation?.Invoke(new UiMessageTranscation
             {
@@ -30,8 +30,7 @@ namespace StockMonitoringCommunity.Services
                 Channel = channel,
                 Direction = direction,
                 Raw = raw,
-                Partnumber=partnumber,
-
+               
             });
         }
     }

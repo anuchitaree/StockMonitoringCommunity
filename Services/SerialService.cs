@@ -399,33 +399,10 @@ namespace StockMonitoringCommunity.Services
                 string text_part = "";
                 var direction = ch != null ? ch.Direction : "";
 
-                //UiEventBus.PublishTransaction("COMPORT_UC_CH1_RAW", 1, direction, result_clean, "");
 
-                UiEventBus.PublishTransaction(UiKeys.TransactionAdd, 1, direction, result_clean, "");
+                UiEventBus.PublishTransaction(UiKeys.TransactionAdd, 1, direction, result_clean);
 
-                //if (ch != null)
-                //{
-                //    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                //    if (pt1 != null && result_clean.Length >= pt1.TotalOfCharactor)
-                //    {
-                //        text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                //        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
-                //        UiEventBus.PublishTransaction("COMPORT_UC_CH1_RAW", 1,ch.Direction,result_clean, text_part);
-                //    }
-
-                //    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                //    if (pt2 != null && ch.Pattern1 == 0 && result_clean.Length >= pt2.TotalOfCharactor)
-                //    {
-                //        text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                //        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
-                //    }
-                //    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                //    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0 && result_clean.Length >= pt3.TotalOfCharactor)
-                //    {
-                //        text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                //        UiEventBus.Publish("MAIN_FORM_CH1_DATA", text_part);
-                //    }
-                //}
+               
 
                 UiEventBus.Publish("COMPORT_UC_CH1_RAW", result_clean, text_part, 1);
                 buffer1.Clear();

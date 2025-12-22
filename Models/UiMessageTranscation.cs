@@ -10,6 +10,6 @@ namespace StockMonitoringCommunity.Models
         public int Channel { get; init; }                
         public string? Direction { get; init; }          
         public string? Raw { get; init; }      
-        public string? Partnumber { get; init; }
+       
     }
 }
