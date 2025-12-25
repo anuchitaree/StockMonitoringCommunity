@@ -1,6 +1,7 @@
 ﻿using StockMonitoringCommunity.Classes;
 using StockMonitoringCommunity.Data;
 using StockMonitoringCommunity.Interfaces;
+using StockMonitoringCommunity.Models;
 using System.IO.Ports;
 using System.Text;
 
@@ -391,7 +392,7 @@ namespace StockMonitoringCommunity.Services
             var ReadingText = serialPort1.ReadExisting();   // อ่านเฉพาะที่มีอยู่ตอนนั้น
             buffer1.Append(ReadingText);
             string result = buffer1.ToString();
-            if (buffer1.ToString().EndsWith("\r")) 
+            if (buffer1.ToString().EndsWith("\r"))
             {
                 string result_clean = buffer1.ToString().Trim();
                 var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
@@ -400,9 +401,38 @@ namespace StockMonitoringCommunity.Services
                 var direction = ch != null ? ch.Direction : "";
 
 
-                UiEventBus.PublishTransaction(UiKeys.TransactionAdd, 1, direction, result_clean);
+                //UiEventBus.PublishTransaction(UiKeys.TransactionAdd, 1, direction, result_clean);
+                string dataDir = Path.Combine(AppContext.BaseDirectory, "scandata");
 
-               
+                Directory.CreateDirectory(dataDir);
+                var uuid = Guid.NewGuid().ToString();
+                var uuid_file = $"{DateTime.Now.ToString("yyyyMMddTHHmmss")}_{uuid}.json";
+                string filePath = Path.Combine(dataDir, uuid_file);
+
+                var writer = new JsonWriteQueue<LogState>(filePath);
+                Task.Run(async () =>
+                {
+                    
+                        writer.Enqueue(new LogState
+                        {
+                            ID = uuid,
+                            Channel = channel,
+                            Direction = direction!,
+                            Datetime = DateTime.UtcNow,
+                            Raw = result_clean,
+                            Pattern_1 = ch!.Pattern1,
+                            Pattern_2 = ch!.Pattern2,
+                            Pattern_3 = ch!.Pattern3,
+                            Pattern_4 = ch!.Pattern4,
+                            Pattern_5 = ch!.Pattern5,
+                            Pattern_6 = ch!.Pattern6,
+
+                        });
+
+                        //await Task.Delay(100);
+                    
+                });
+
 
                 UiEventBus.Publish("COMPORT_UC_CH1_RAW", result_clean, text_part, 1);
                 buffer1.Clear();
