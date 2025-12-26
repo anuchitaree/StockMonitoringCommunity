@@ -4808,23 +4808,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Anuchit-dev\\.nuget\\packages\\": {},
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\StockMonitoringCommunity\\StockMonitoringCommunity.csproj",
+      "projectUniqueName": "C:\\Project\\StockMonitoringCommunity\\StockMonitoringCommunity.csproj",
       "projectName": "StockMonitoringCommunity",
-      "projectPath": "D:\\Project\\StockMonitoringCommunity\\StockMonitoringCommunity.csproj",
-      "packagesPath": "C:\\Users\\Anuchit-dev\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\StockMonitoringCommunity\\obj\\",
+      "projectPath": "C:\\Project\\StockMonitoringCommunity\\StockMonitoringCommunity.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "C:\\Project\\StockMonitoringCommunity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Anuchit-dev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

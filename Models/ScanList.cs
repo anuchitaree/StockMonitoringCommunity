@@ -9,7 +9,8 @@ namespace StockMonitoringCommunity.Models
         public int Id { get; set; }
         public string? Channel { get; set; }
         public string? Raw { get; set; }
-        public string? Partnumber { get; set; }
+
+        //public string? Partnumber { get; set; }
         public string? Timestamp { get; set; }
     }
 

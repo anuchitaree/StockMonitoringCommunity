@@ -2,8 +2,12 @@
 using StockMonitoringCommunity.Data;
 using StockMonitoringCommunity.Interfaces;
 using StockMonitoringCommunity.Models;
+using StockMonitoringCommunity.State;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Text;
+using System.Text.Json;
+using static System.Windows.Forms.LinkLabel;
 
 namespace StockMonitoringCommunity.Services
 {
@@ -23,6 +27,29 @@ namespace StockMonitoringCommunity.Services
         private static StringBuilder buffer5 = new StringBuilder();
         private static StringBuilder buffer6 = new StringBuilder();
 
+        private static System.Threading.Timer? _timer;
+
+        //public static Action<string> OnStateChanged { get; }
+
+        static SerialService()
+        {
+            StateStore.StateChanged += OnStateChanged;
+        }
+        private static void OnStateChanged(string key)
+        {
+            if (key == "MAIN_FORM_RUNNING_STATUS")
+            {
+                if (StateStore.State.IsRunning)
+                {
+                    Start();
+                }
+                else
+                {
+                    Stop();
+                }
+
+            }
+        }
 
 
         #region Initialization Serial Port
@@ -57,7 +84,7 @@ namespace StockMonitoringCommunity.Services
                                 var setting1 = string.Format("{0} : {1},{2},{3},{4},{5},handshake:{6}", comp.Direction, comp.PortName,
                                    comp.Baudrate, comp.DataBits, comp.Stopbit, comp.Parity, comp.Handshake);
                                 UiEventBus.Publish("MAIN_FORM_CH1_COM", setting1);
-                                UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.FromArgb(0, 255, 0));
+                                UiEventBus.Publish("CH1_STATUS", Color.FromArgb(0, 255, 0));
                                 break;
                             }
                         }
@@ -70,7 +97,7 @@ namespace StockMonitoringCommunity.Services
                         {
                             maxRetries--;
                             Console.WriteLine(exception.Message);
-                            UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.Empty);
+                            UiEventBus.Publish("CH1_STATUS", Color.Empty);
                         }
                     }
 
@@ -86,8 +113,6 @@ namespace StockMonitoringCommunity.Services
             }
 
         }
-
-
 
         public async static void OpenPort2(Comport comp)
         {
@@ -118,7 +143,7 @@ namespace StockMonitoringCommunity.Services
                             var setting1 = string.Format("{0} : {1},{2},{3},{4},{5},handshake:{6}", comp.Direction, comp.PortName,
                                    comp.Baudrate, comp.DataBits, comp.Stopbit, comp.Parity, comp.Handshake);
                             UiEventBus.Publish("MAIN_FORM_CH2_COM", setting1);
-                            UiEventBus.Publish("MAIN_FORM_CH2_STATUS", Color.FromArgb(0, 255, 0));
+                            UiEventBus.Publish("CH2_STATUS", Color.FromArgb(0, 255, 0));
                             break;
                         }
                     }
@@ -131,7 +156,7 @@ namespace StockMonitoringCommunity.Services
                     {
                         maxRetries--;
                         Console.WriteLine(exception.Message);
-                        UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.Empty);
+                        UiEventBus.Publish("CH1_STATUS", Color.Empty);
                     }
                 }
 
@@ -177,7 +202,7 @@ namespace StockMonitoringCommunity.Services
                             var setting1 = string.Format("{0} : {1},{2},{3},{4},{5},handshake:{6}", comp.Direction, comp.PortName,
                                    comp.Baudrate, comp.DataBits, comp.Stopbit, comp.Parity, comp.Handshake);
                             UiEventBus.Publish("MAIN_FORM_CH3_COM", setting1);
-                            UiEventBus.Publish("MAIN_FORM_CH3_STATUS", Color.FromArgb(0, 255, 0));
+                            UiEventBus.Publish("CH3_STATUS", Color.FromArgb(0, 255, 0));
                             break;
                         }
                     }
@@ -190,7 +215,7 @@ namespace StockMonitoringCommunity.Services
                     {
                         maxRetries--;
                         Console.WriteLine(exception.Message);
-                        UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.Empty);
+                        UiEventBus.Publish("CH3_STATUS", Color.Empty);
                     }
                 }
 
@@ -236,7 +261,7 @@ namespace StockMonitoringCommunity.Services
                             var setting1 = string.Format("{0} : {1},{2},{3},{4},{5},handshake:{6}", comp.Direction, comp.PortName,
                                    comp.Baudrate, comp.DataBits, comp.Stopbit, comp.Parity, comp.Handshake);
                             UiEventBus.Publish("MAIN_FORM_CH4_COM", setting1);
-                            UiEventBus.Publish("MAIN_FORM_CH4_STATUS", Color.FromArgb(0, 255, 0));
+                            UiEventBus.Publish("CH4_STATUS", Color.FromArgb(0, 255, 0));
                             break;
                         }
                     }
@@ -249,7 +274,7 @@ namespace StockMonitoringCommunity.Services
                     {
                         maxRetries--;
                         Console.WriteLine(exception.Message);
-                        UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.Empty);
+                        UiEventBus.Publish("CH4_STATUS", Color.Empty);
                     }
                 }
 
@@ -295,7 +320,7 @@ namespace StockMonitoringCommunity.Services
                             var setting1 = string.Format("{0} : {1},{2},{3},{4},{5},handshake:{6}", comp.Direction, comp.PortName,
                                    comp.Baudrate, comp.DataBits, comp.Stopbit, comp.Parity, comp.Handshake);
                             UiEventBus.Publish("MAIN_FORM_CH5_COM", setting1);
-                            UiEventBus.Publish("MAIN_FORM_CH5_STATUS", Color.FromArgb(0, 255, 0));
+                            UiEventBus.Publish("CH5_STATUS", Color.FromArgb(0, 255, 0));
                             break;
                         }
                     }
@@ -308,7 +333,7 @@ namespace StockMonitoringCommunity.Services
                     {
                         maxRetries--;
                         Console.WriteLine(exception.Message);
-                        UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.Empty);
+                        UiEventBus.Publish("CH5_STATUS", Color.Empty);
                     }
                 }
 
@@ -354,7 +379,7 @@ namespace StockMonitoringCommunity.Services
                             var setting1 = string.Format("{0} : {1},{2},{3},{4},{5},handshake:{6}", comp.Direction, comp.PortName,
                                    comp.Baudrate, comp.DataBits, comp.Stopbit, comp.Parity, comp.Handshake);
                             UiEventBus.Publish("MAIN_FORM_CH6_COM", setting1);
-                            UiEventBus.Publish("MAIN_FORM_CH6_STATUS", Color.FromArgb(0, 255, 0));
+                            UiEventBus.Publish("CH6_STATUS", Color.FromArgb(0, 255, 0));
                             break;
                         }
                     }
@@ -367,7 +392,7 @@ namespace StockMonitoringCommunity.Services
                     {
                         maxRetries--;
                         Console.WriteLine(exception.Message);
-                        UiEventBus.Publish("MAIN_FORM_CH1_STATUS", Color.Empty);
+                        UiEventBus.Publish("CH6_STATUS", Color.Empty);
                     }
                 }
 
@@ -386,6 +411,8 @@ namespace StockMonitoringCommunity.Services
 
         #endregion
 
+        #region DataReceive Handler
+
         private static void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
         {
             int channel = 1;
@@ -394,52 +421,13 @@ namespace StockMonitoringCommunity.Services
             string result = buffer1.ToString();
             if (buffer1.ToString().EndsWith("\r"))
             {
-                string result_clean = buffer1.ToString().Trim();
-                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-
-                string text_part = "";
-                var direction = ch != null ? ch.Direction : "";
-
-
-                //UiEventBus.PublishTransaction(UiKeys.TransactionAdd, 1, direction, result_clean);
-                string dataDir = Path.Combine(AppContext.BaseDirectory, "scandata");
-
-                Directory.CreateDirectory(dataDir);
-                var uuid = Guid.NewGuid().ToString();
-                var uuid_file = $"{DateTime.Now.ToString("yyyyMMddTHHmmss")}_{uuid}.json";
-                string filePath = Path.Combine(dataDir, uuid_file);
-
-                var writer = new JsonWriteQueue<LogState>(filePath);
-                Task.Run(async () =>
-                {
-                    
-                        writer.Enqueue(new LogState
-                        {
-                            ID = uuid,
-                            Channel = channel,
-                            Direction = direction!,
-                            Datetime = DateTime.UtcNow,
-                            Raw = result_clean,
-                            Pattern_1 = ch!.Pattern1,
-                            Pattern_2 = ch!.Pattern2,
-                            Pattern_3 = ch!.Pattern3,
-                            Pattern_4 = ch!.Pattern4,
-                            Pattern_5 = ch!.Pattern5,
-                            Pattern_6 = ch!.Pattern6,
-
-                        });
-
-                        //await Task.Delay(100);
-                    
-                });
-
-
-                UiEventBus.Publish("COMPORT_UC_CH1_RAW", result_clean, text_part, 1);
+                WriteScanDataToFolder(channel, buffer1);
+                UiEventBus.Publish("CH1_RAW", result, 1);
                 buffer1.Clear();
                 serialPort1.DiscardInBuffer();
             }
+            Start();
         }
-
 
         private static void DataReceivedHandler2(object sender, SerialDataReceivedEventArgs e)
         {
@@ -447,32 +435,10 @@ namespace StockMonitoringCommunity.Services
             var ReadingText = serialPort2.ReadExisting();   // อ่านเฉพาะที่มีอยู่ตอนนั้น
             buffer2.Append(ReadingText);
             string result = buffer2.ToString();
-
             if (buffer2.ToString().EndsWith("\r")) // || buffer.ToString().EndsWith("\r\n")) 
             {
-                string result_clean = buffer2.ToString().Trim();
-                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-                if (ch != null)
-                {
-                    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                    if (pt1 != null)
-                    {
-                        string text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH2_DATA", text_part);
-                    }
-                    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                    if (pt2 != null && ch.Pattern1 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH2_DATA", text_part);
-                    }
-                    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH2_DATA", text_part);
-                    }
-                }
+                WriteScanDataToFolder(channel, buffer2);
+                UiEventBus.Publish("CH2_RAW", result, 2);
                 buffer2.Clear();
                 serialPort2.DiscardInBuffer();
             }
@@ -488,30 +454,8 @@ namespace StockMonitoringCommunity.Services
 
             if (buffer3.ToString().EndsWith("\r")) // || buffer.ToString().EndsWith("\r\n")) 
             {
-                string result_clean = buffer3.ToString().Trim();
-                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-                if (ch != null)
-                {
-                    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                    if (pt1 != null)
-                    {
-                        string text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH3_DATA", text_part);
-                    }
-                    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                    if (pt2 != null && ch.Pattern1 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH3_DATA", text_part);
-                    }
-                    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH3_DATA", text_part);
-                    }
-                }
-
+                WriteScanDataToFolder(channel, buffer3);
+                UiEventBus.Publish("CH3_RAW", result, 3);
                 buffer3.Clear();
                 serialPort3.DiscardInBuffer();
             }
@@ -527,34 +471,13 @@ namespace StockMonitoringCommunity.Services
 
             if (buffer4.ToString().EndsWith("\r")) // || buffer.ToString().EndsWith("\r\n")) 
             {
-                string result_clean = buffer4.ToString().Trim();
-                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-                if (ch != null)
-                {
-                    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                    if (pt1 != null)
-                    {
-                        string text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH4_DATA", text_part);
-                    }
-                    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                    if (pt2 != null && ch.Pattern1 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH4_DATA", text_part);
-                    }
-                    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH4_DATA", text_part);
-                    }
-                }
-
+                WriteScanDataToFolder(channel, buffer4);
+                UiEventBus.Publish("CH4_RAW", result, 4);
                 buffer4.Clear();
                 serialPort4.DiscardInBuffer();
             }
         }
+
         private static void DataReceivedHandler5(object sender, SerialDataReceivedEventArgs e)
         {
             int channel = 5;
@@ -565,34 +488,13 @@ namespace StockMonitoringCommunity.Services
 
             if (buffer5.ToString().EndsWith("\r")) // || buffer.ToString().EndsWith("\r\n")) 
             {
-                string result_clean = buffer4.ToString().Trim();
-                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-                if (ch != null)
-                {
-                    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                    if (pt1 != null)
-                    {
-                        string text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH5_DATA", text_part);
-                    }
-                    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                    if (pt2 != null && ch.Pattern1 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH5_DATA", text_part);
-                    }
-                    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH5_DATA", text_part);
-                    }
-                }
-
+                WriteScanDataToFolder(channel, buffer5);
+                UiEventBus.Publish("CH5_RAW", result, 5);
                 buffer5.Clear();
                 serialPort5.DiscardInBuffer();
             }
         }
+
         private static void DataReceivedHandler6(object sender, SerialDataReceivedEventArgs e)
         {
             int channel = 6;
@@ -603,33 +505,58 @@ namespace StockMonitoringCommunity.Services
 
             if (buffer6.ToString().EndsWith("\r")) // || buffer.ToString().EndsWith("\r\n")) 
             {
-                string result_clean = buffer4.ToString().Trim();
-                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
-                if (ch != null)
-                {
-                    var pt1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern1).FirstOrDefault();
-                    if (pt1 != null)
-                    {
-                        string text_part = result_clean.Substring(pt1.StartCharactor, pt1.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH6_DATA", text_part);
-                    }
-                    var pt2 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern2).FirstOrDefault();
-                    if (pt2 != null && ch.Pattern1 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt2.StartCharactor, pt2.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH6_DATA", text_part);
-                    }
-                    var pt3 = Parameter.InputPatternList.Where(x => x.Pattern_ID == ch.Pattern3).FirstOrDefault();
-                    if (pt3 != null && ch.Pattern1 == 0 && ch.Pattern2 == 0)
-                    {
-                        string text_part = result_clean.Substring(pt3.StartCharactor, pt3.NumberOfCharactor);
-                        UiEventBus.Publish("MAIN_FORM_CH6_DATA", text_part);
-                    }
-                }
+                WriteScanDataToFolder(channel, buffer6);
+                UiEventBus.Publish("CH6_RAW", result, 6);
                 buffer6.Clear();
                 serialPort6.DiscardInBuffer();
             }
         }
+
+        #endregion
+
+        public static bool WriteScanDataToFolder(int channel, StringBuilder buffer1)
+        {
+            try
+            {
+                string result_clean = buffer1.ToString().Trim();
+                var ch = Parameter.ComportPattenList.Where(x => x.Channel_ID == channel).FirstOrDefault();
+
+                var direction = ch != null ? ch.Direction : "";
+                string dataDir = Path.Combine(AppContext.BaseDirectory, "scandata");
+
+                Directory.CreateDirectory(dataDir);
+                var uuid = Guid.NewGuid().ToString();
+                var uuid_file = $"{DateTime.Now.ToString("yyyyMMddTHHmmss")}_{uuid}.json";
+                string filePath = Path.Combine(dataDir, uuid_file);
+
+                var writer = new JsonWriteQueue<LogState>(filePath);
+                Task.Run(async () =>
+                {
+                    writer.Enqueue(new LogState
+                    {
+                        ID = uuid,
+                        Channel = channel,
+                        Direction = direction!,
+                        Datetime = DateTime.UtcNow,
+                        Raw = result_clean,
+                        Pattern_1 = ch!.Pattern1,
+                        Pattern_2 = ch!.Pattern2,
+                        Pattern_3 = ch!.Pattern3,
+                        Pattern_4 = ch!.Pattern4,
+                        Pattern_5 = ch!.Pattern5,
+                        Pattern_6 = ch!.Pattern6,
+
+                    });
+                });
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
         public static void Close()
         {
             if (serialPort1 != null)
@@ -700,5 +627,100 @@ namespace StockMonitoringCommunity.Services
                 }
             }
         }
+
+        public static void Start()
+        {
+            if (_timer != null)
+                return;
+
+            _timer = new System.Threading.Timer(
+                callback: DoWork,
+                state: null,
+                dueTime: TimeSpan.Zero,
+                period: TimeSpan.FromMilliseconds(500)
+            );
+        }
+        private static void DoWork(object? state)
+        {
+            Debug.WriteLine($"Tick: {DateTime.Now}");
+            ReadJson();
+        }
+
+        public static void Stop()
+        {
+            _timer?.Dispose();
+            _timer = null;
+        }
+
+
+
+        public static void ReadJson()
+        {
+            Stop();
+            string path = Path.Combine(AppContext.BaseDirectory, "scandata");
+
+            Directory.CreateDirectory(path);
+
+            var list = new List<LogState>();
+
+            foreach (var file in Directory.EnumerateFiles(path, "*.json"))
+            {
+                string json = File.ReadAllText(file);
+                Debug.WriteLine(file);
+
+                var item = JsonSerializer.Deserialize<LogState>(json);
+
+                var pattern = item.Pattern_1;
+               var (sucess,partnumer) = FilterPartnumber(item.Raw, item.Pattern_1);
+
+
+
+
+
+
+                list.Add(item!);
+            }
+
+
+
+            //if (!File.Exists(path))
+            //    return default;
+
+            //var json = File.ReadAllText(path);
+            //return JsonSerializer.Deserialize<T>(json);
+            Start();
+        }
+
+        private static (bool success, string partnumer) FilterPartnumber(string rawData, int pattern)
+        {
+            try
+            {
+                switch (pattern)
+                {
+                    case 1:
+                        var case1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == 1).FirstOrDefault();
+                        if (case1 != null)
+                        {
+                            int start1 = case1.StartCharactor - 1;
+                            int length1 = case1.NumberOfCharactor;
+                            if (rawData.Length >= start1 + length1)
+                            {
+                                return (true , rawData.Substring(start1, length1));
+                            }
+                        }
+                        return (false,"");
+                    case 2:
+                        return (false,"");
+                    default:
+                        return (false, "");
+                }
+            }
+            catch
+            {
+                return (false, "");
+            }
+        }
+
+
     }
 }

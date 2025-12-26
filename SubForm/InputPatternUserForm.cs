@@ -26,7 +26,7 @@ namespace StockMonitoringCommunity.SubForm
         {
             switch (msg.Key)
             {
-                case "MAIN_FORM_CH1_RAW":
+                case "CH1_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => TbScan.Text = msg.Data?.ToString()));

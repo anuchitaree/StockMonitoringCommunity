@@ -167,7 +167,7 @@ namespace StockMonitoringCommunity
         {
             switch (msg.Key)
             {
-                case "MAIN_FORM_CH1_STATUS":
+                case "CH1_STATUS":
                     if (msg.Data is not Color color1)
                         return;
                     if (InvokeRequired)
@@ -179,7 +179,7 @@ namespace StockMonitoringCommunity
                         button1.BackColor = color1;
                     }
                     break;
-                case "MAIN_FORM_CH2_STATUS":
+                case "CH2_STATUS":
                     if (msg.Data is not Color color2)
                         return;
                     if (InvokeRequired)
@@ -191,7 +191,7 @@ namespace StockMonitoringCommunity
                         button2.BackColor = color2;
                     }
                     break;
-                case "MAIN_FORM_CH3_STATUS":
+                case "CH3_STATUS":
                     if (msg.Data is not Color color3)
                         return;
                     if (InvokeRequired)
@@ -203,7 +203,7 @@ namespace StockMonitoringCommunity
                         button3.BackColor = color3;
                     }
                     break;
-                case "MAIN_FORM_CH4_STATUS":
+                case "CH4_STATUS":
                     if (msg.Data is not Color color4)
                         return;
                     if (InvokeRequired)
@@ -215,7 +215,7 @@ namespace StockMonitoringCommunity
                         button4.BackColor = color4;
                     }
                     break;
-                case "MAIN_FORM_CH5_STATUS":
+                case "CH5_STATUS":
                     if (msg.Data is not Color color5)
                         return;
                     if (InvokeRequired)
@@ -227,7 +227,7 @@ namespace StockMonitoringCommunity
                         button5.BackColor = color5;
                     }
                     break;
-                case "MAIN_FORM_CH6_STATUS":
+                case "CH6_STATUS":
                     if (msg.Data is not Color color6)
                         return;
                     if (InvokeRequired)
@@ -239,7 +239,7 @@ namespace StockMonitoringCommunity
                         button6.BackColor = color6;
                     }
                     break;
-                case "MAIN_FORM_CH1_DATA":
+                case "CH1_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => textBox1.Text = msg.Data?.ToString()));
@@ -249,7 +249,7 @@ namespace StockMonitoringCommunity
                         textBox1.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH2_DATA":
+                case "CH2_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => textBox2.Text = msg.Data?.ToString()));
@@ -259,7 +259,7 @@ namespace StockMonitoringCommunity
                         textBox2.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH3_DATA":
+                case "CH3_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => textBox3.Text = msg.Data?.ToString()));
@@ -269,7 +269,7 @@ namespace StockMonitoringCommunity
                         textBox3.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH4_DATA":
+                case "CH4_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => textBox4.Text = msg.Data?.ToString()));
@@ -279,7 +279,7 @@ namespace StockMonitoringCommunity
                         textBox4.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH5_DATA":
+                case "CH5_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => textBox5.Text = msg.Data?.ToString()));
@@ -289,7 +289,7 @@ namespace StockMonitoringCommunity
                         textBox5.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH6_DATA":
+                case "CH6_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => textBox6.Text = msg.Data?.ToString()));
@@ -299,7 +299,7 @@ namespace StockMonitoringCommunity
                         textBox6.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH1_RESET":
+                case "CH1_RESET":
                     SerialService.Close();
                     InitialSetup();
                     break;
@@ -319,7 +319,7 @@ namespace StockMonitoringCommunity
             {
                 switch (msg.Key)
                 {
-                    case "COMPORT_UC_CH1_RAW": // \", result_clean, text_part, 1);"
+                    case "CH1_RAW": // \", result_clean, text_part, 1);"
                         //if (_isStarted)
                         //{
                         //    using (var db = new AppDbContext())
@@ -369,7 +369,7 @@ namespace StockMonitoringCommunity
             }
         }
 
-      
+
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -420,5 +420,9 @@ namespace StockMonitoringCommunity
 
         #endregion
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //SerialService.ReadJson();
+        }
     }
 }

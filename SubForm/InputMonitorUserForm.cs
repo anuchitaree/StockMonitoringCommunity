@@ -27,7 +27,7 @@ namespace StockMonitoringCommunity.SubForm
         {
             switch (msg.Key)
             {
-                case "MAIN_FORM_CH1_STATUS":
+                case "CH1_STATUS":
                     if (msg.Data is not Color color1)
                         return;
                     if (InvokeRequired)
@@ -39,7 +39,7 @@ namespace StockMonitoringCommunity.SubForm
                         button1.BackColor = color1;
                     }
                     break;
-                case "MAIN_FORM_CH2_STATUS":
+                case "CH2_STATUS":
                     if (msg.Data is not Color color2)
                         return;
                     if (InvokeRequired)
@@ -51,7 +51,7 @@ namespace StockMonitoringCommunity.SubForm
                         button2.BackColor = color2;
                     }
                     break;
-                case "MAIN_FORM_CH3_STATUS":
+                case "CH3_STATUS":
                     if (msg.Data is not Color color3)
                         return;
                     if (InvokeRequired)
@@ -63,7 +63,7 @@ namespace StockMonitoringCommunity.SubForm
                         button3.BackColor = color3;
                     }
                     break;
-                case "MAIN_FORM_CH4_STATUS":
+                case "CH4_STATUS":
                     if (msg.Data is not Color color4)
                         return;
                     if (InvokeRequired)
@@ -75,7 +75,7 @@ namespace StockMonitoringCommunity.SubForm
                         button4.BackColor = color4;
                     }
                     break;
-                case "MAIN_FORM_CH5_STATUS":
+                case "CH5_STATUS":
                     if (msg.Data is not Color color5)
                         return;
                     if (InvokeRequired)
@@ -87,7 +87,7 @@ namespace StockMonitoringCommunity.SubForm
                         button5.BackColor = color5;
                     }
                     break;
-                case "MAIN_FORM_CH6_STATUS":
+                case "CH6_STATUS":
                     if (msg.Data is not Color color6)
                         return;
                     if (InvokeRequired)
@@ -99,7 +99,7 @@ namespace StockMonitoringCommunity.SubForm
                         button6.BackColor = color6;
                     }
                     break;
-                case "MAIN_FORM_CH1_COM":
+                case "CH1_COM":
 
                     if (InvokeRequired)
                     {
@@ -111,7 +111,7 @@ namespace StockMonitoringCommunity.SubForm
 
                     }
                     break;
-                case "MAIN_FORM_CH2_COM":
+                case "CH2_COM":
 
                     if (InvokeRequired)
                     {
@@ -122,7 +122,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtCOM2.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH3_COM":
+                case "CH3_COM":
 
                     if (InvokeRequired)
                     {
@@ -133,7 +133,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtCOM3.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH4_COM":
+                case "CH4_COM":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtCOM4.Text = msg.Data?.ToString()));
@@ -143,7 +143,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtCOM4.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH5_COM":
+                case "CH5_COM":
 
                     if (InvokeRequired)
                     {
@@ -154,7 +154,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtCOM5.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH6_COM":
+                case "CH6_COM":
 
                     if (InvokeRequired)
                     {
@@ -225,7 +225,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtdata6.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH1_RAW":
+                case "CH1_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtraw1.Text = msg.Data?.ToString()));
@@ -235,7 +235,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtraw1.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH2_RAW":
+                case "CH2_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtraw2.Text = msg.Data?.ToString()));
@@ -245,7 +245,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtraw2.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH3_RAW":
+                case "CH3_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtraw3.Text = msg.Data?.ToString()));
@@ -255,7 +255,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtraw3.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH4_RAW":
+                case "CH4_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtraw4.Text = msg.Data?.ToString()));
@@ -265,7 +265,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtraw4.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH5_RAW":
+                case "CH5_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtraw5.Text = msg.Data?.ToString()));
@@ -275,7 +275,7 @@ namespace StockMonitoringCommunity.SubForm
                         txtraw5.Text = msg.Data?.ToString();
                     }
                     break;
-                case "MAIN_FORM_CH6_RAW":
+                case "CH6_RAW":
                     if (InvokeRequired)
                     {
                         Invoke(new Action(() => txtraw6.Text = msg.Data?.ToString()));

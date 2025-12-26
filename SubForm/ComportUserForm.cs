@@ -33,9 +33,9 @@ namespace StockMonitoringCommunity.SubForm
         {
             COMPort();
             LoadSettingfile(1);
-            string[] head = new string[] { "No", "CH",  "Part number", "Timestamp" ,"Raw" };
-            string[] property = new string[] { "Id", "Channel", "Partnumber", "Timestamp", "Raw" };
-            int[] width = new int[] { 30, 30, 150,150,800 };
+            string[] head = new string[] { "No", "CH",   "Timestamp" ,"Raw" };
+            string[] property = new string[] { "Id", "Channel",  "Timestamp", "Raw" };
+            int[] width = new int[] { 30, 30, 150,800 };
             InitialDatagridview.Pattern_1(head, property, width, dataGridView1);
             UiEventBus.MessagePublished += OnMessage;
             scanLists.Clear();
@@ -47,18 +47,18 @@ namespace StockMonitoringCommunity.SubForm
         {
             switch (msg.Key)
             {
-                case "COMPORT_UC_CH1_RAW":
+                case "CH1_RAW":
 
-                    var ch = msg.MoreExtraData?.ToString()!;
                    var raw = msg.Data?.ToString()!;
-                    var partnumber = msg.ExtraData?.ToString()!;
+                    var ch = msg.ExtraData?.ToString()!;
+                    //var partnumber = msg.ExtraData?.ToString()!;
                     var item = new ScanList
                     {
                         Id = rowIndex++,
                         Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                         Channel = ch.ToString(),
                         Raw = raw,
-                        Partnumber = partnumber
+                        //Partnumber = partnumber
                     };
 
                     if (InvokeRequired)
@@ -88,7 +88,7 @@ namespace StockMonitoringCommunity.SubForm
                 Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 Channel = ch.ToString(),
                 Raw = raw,
-                Partnumber = partnumber
+                //Partnumber = partnumber
             });
             dataGridView1.DataSource = scanLists;
 
@@ -251,7 +251,7 @@ namespace StockMonitoringCommunity.SubForm
                     }
 
                 }
-                UiEventBus.Publish("MAIN_FORM_CH1_RESET", channel_ID);
+                UiEventBus.Publish("CH1_RESET", channel_ID);
                 MessageBox.Show("Save setting completed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //StateHub.Raise("Postsetting", channel_number);

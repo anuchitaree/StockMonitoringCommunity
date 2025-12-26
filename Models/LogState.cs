@@ -14,6 +14,8 @@
         public int Pattern_4 { get; set; }
         public int Pattern_5 { get; set; }
         public int Pattern_6 { get; set; }
+
+        public string Partnumber { get; set; } = "";
     }
 
 }

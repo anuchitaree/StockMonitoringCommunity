@@ -56,6 +56,7 @@
             textBox1 = new TextBox();
             button1 = new Button();
             lbProcess = new Label();
+            button7 = new Button();
             menuStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -66,7 +67,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, settingToolStripMenuItem, utilityToolStripMenuItem, runToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1414, 24);
+            menuStrip1.Size = new Size(836, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -150,26 +151,27 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.2659111F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 83.7340851F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.6315784F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.36842F));
             tableLayoutPanel1.Controls.Add(panelMain, 1, 1);
             tableLayoutPanel1.Controls.Add(panel2, 0, 1);
             tableLayoutPanel1.Controls.Add(lbProcess, 0, 0);
+            tableLayoutPanel1.Controls.Add(button7, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 24);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1414, 630);
+            tableLayoutPanel1.Size = new Size(836, 630);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // panelMain
             // 
             panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(232, 23);
+            panelMain.Location = new Point(234, 23);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(1179, 604);
+            panelMain.Size = new Size(599, 604);
             panelMain.TabIndex = 0;
             // 
             // panel2
@@ -189,7 +191,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(3, 23);
             panel2.Name = "panel2";
-            panel2.Size = new Size(223, 604);
+            panel2.Size = new Size(225, 604);
             panel2.TabIndex = 1;
             // 
             // textBox6
@@ -295,16 +297,26 @@
             lbProcess.Dock = DockStyle.Fill;
             lbProcess.Location = new Point(3, 0);
             lbProcess.Name = "lbProcess";
-            lbProcess.Size = new Size(223, 20);
+            lbProcess.Size = new Size(225, 20);
             lbProcess.TabIndex = 2;
             lbProcess.Text = "Stop ";
             lbProcess.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(234, 3);
+            button7.Name = "button7";
+            button7.Size = new Size(10, 14);
+            button7.TabIndex = 3;
+            button7.Text = "button7";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1414, 654);
+            ClientSize = new Size(836, 654);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -351,5 +363,6 @@
         private ToolStripMenuItem startToolStripMenuItem;
         private ToolStripMenuItem stopToolStripMenuItem;
         private Label lbProcess;
+        private Button button7;
     }
 }
