@@ -35,6 +35,7 @@
             serialCOMPortToolStripMenuItem = new ToolStripMenuItem();
             inputPatternToolStripMenuItem = new ToolStripMenuItem();
             connectionToServerToolStripMenuItem = new ToolStripMenuItem();
+            partnumberAddEditToolStripMenuItem = new ToolStripMenuItem();
             utilityToolStripMenuItem = new ToolStripMenuItem();
             serialCOMPortMonitorToolStripMenuItem = new ToolStripMenuItem();
             runToolStripMenuItem = new ToolStripMenuItem();
@@ -87,7 +88,7 @@
             // 
             // settingToolStripMenuItem
             // 
-            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { serialCOMPortToolStripMenuItem, inputPatternToolStripMenuItem, connectionToServerToolStripMenuItem });
+            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { serialCOMPortToolStripMenuItem, inputPatternToolStripMenuItem, connectionToServerToolStripMenuItem, partnumberAddEditToolStripMenuItem });
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             settingToolStripMenuItem.Size = new Size(56, 20);
             settingToolStripMenuItem.Text = "Setting";
@@ -95,23 +96,30 @@
             // serialCOMPortToolStripMenuItem
             // 
             serialCOMPortToolStripMenuItem.Name = "serialCOMPortToolStripMenuItem";
-            serialCOMPortToolStripMenuItem.Size = new Size(184, 22);
+            serialCOMPortToolStripMenuItem.Size = new Size(186, 22);
             serialCOMPortToolStripMenuItem.Text = "Serial COM port";
             serialCOMPortToolStripMenuItem.Click += serialCOMPortToolStripMenuItem_Click;
             // 
             // inputPatternToolStripMenuItem
             // 
             inputPatternToolStripMenuItem.Name = "inputPatternToolStripMenuItem";
-            inputPatternToolStripMenuItem.Size = new Size(184, 22);
+            inputPatternToolStripMenuItem.Size = new Size(186, 22);
             inputPatternToolStripMenuItem.Text = "Input pattern";
             inputPatternToolStripMenuItem.Click += inputPatternToolStripMenuItem_Click;
             // 
             // connectionToServerToolStripMenuItem
             // 
             connectionToServerToolStripMenuItem.Name = "connectionToServerToolStripMenuItem";
-            connectionToServerToolStripMenuItem.Size = new Size(184, 22);
+            connectionToServerToolStripMenuItem.Size = new Size(186, 22);
             connectionToServerToolStripMenuItem.Text = "Connection to server";
             connectionToServerToolStripMenuItem.Click += connectionToServerToolStripMenuItem_Click;
+            // 
+            // partnumberAddEditToolStripMenuItem
+            // 
+            partnumberAddEditToolStripMenuItem.Name = "partnumberAddEditToolStripMenuItem";
+            partnumberAddEditToolStripMenuItem.Size = new Size(186, 22);
+            partnumberAddEditToolStripMenuItem.Text = "Partnumber add, edit";
+            partnumberAddEditToolStripMenuItem.Click += partnumberAddEditToolStripMenuItem_Click;
             // 
             // utilityToolStripMenuItem
             // 
@@ -364,5 +372,6 @@
         private ToolStripMenuItem stopToolStripMenuItem;
         private Label lbProcess;
         private Button button7;
+        private ToolStripMenuItem partnumberAddEditToolStripMenuItem;
     }
 }

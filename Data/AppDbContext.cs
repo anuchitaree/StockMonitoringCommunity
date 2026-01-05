@@ -17,8 +17,10 @@ namespace StockMonitoringCommunity.Data
         public DbSet<Comport> Comports  => Set<Comport>();
         public DbSet<InputPattern> InputPatterns => Set<InputPattern>();
         public DbSet<ScanInOutTransaction> ScanInOutTransactions => Set<ScanInOutTransaction>();
+        public DbSet<MasterStock> MasterStocks => Set<MasterStock>();
+        public DbSet<AccumulateStockLog> AccumulateStockLogs => Set<AccumulateStockLog>();
 
-       
+
 
 
 

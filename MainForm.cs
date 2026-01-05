@@ -16,7 +16,7 @@ namespace StockMonitoringCommunity
         private InputPatternUserForm _inputPatternUserForm;
         private ConnectServerUserForm _connectServerUserForm;
         private InputMonitorUserForm _inputMonitorUserForm;
-
+        private MasterPartnumberUserControl _masterPartnumberUserControl;
         private bool _isStarted = false;
 
         public MainForm()
@@ -27,6 +27,7 @@ namespace StockMonitoringCommunity
             _inputPatternUserForm = new InputPatternUserForm();
             _connectServerUserForm = new ConnectServerUserForm();
             _inputMonitorUserForm = new InputMonitorUserForm();
+            _masterPartnumberUserControl= new MasterPartnumberUserControl();
 
             UiEventBus.MessagePublished += OnMessage;
             UiEventBus.MessagePublishedTranscation += OnMessageTranscation;
@@ -80,6 +81,16 @@ namespace StockMonitoringCommunity
             };
             panelMain.Controls.Clear();
             panelMain.Controls.Add(_inputMonitorUserForm);
+        }
+
+        private void partnumberAddEditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _masterPartnumberUserControl = new MasterPartnumberUserControl
+            {
+                Dock = DockStyle.Fill
+            };
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(_masterPartnumberUserControl);
         }
 
         #endregion
@@ -154,6 +165,18 @@ namespace StockMonitoringCommunity
                 }
                 Parameter.InputPatternList = await db.InputPatterns.ToListAsync();
             }
+
+
+            string path = Path.Combine(AppContext.BaseDirectory, "scandata");
+            Directory.CreateDirectory(path);
+            var files = Directory.EnumerateFiles(path, "*.json.tmp");
+            foreach (var filePath in files)
+            {
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
+            }
+
+
 
         }
 
@@ -342,10 +365,10 @@ namespace StockMonitoringCommunity
                         break;
                 }
             }
-            catch (Exception ex)
+            catch 
             {
 
-                throw;
+              
             }
 
         }
@@ -424,5 +447,7 @@ namespace StockMonitoringCommunity
         {
             //SerialService.ReadJson();
         }
+
+       
     }
 }

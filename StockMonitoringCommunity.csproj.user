@@ -22,6 +22,9 @@
     <Compile Update="SubForm\LoginUserForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="SubForm\MasterPartnumberUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="SubForm\NotificationUserForm.cs">
       <SubType>UserControl</SubType>
     </Compile>

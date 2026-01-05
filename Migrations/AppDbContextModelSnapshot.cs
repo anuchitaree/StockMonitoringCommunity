@@ -22,6 +22,30 @@ namespace StockMonitoringCommunity.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("StockMonitoringCommunity.Data.AccumulateStockLog", b =>
+                {
+                    b.Property<int>("AccumulateStockLog_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AccumulateStockLog_ID"));
+
+                    b.Property<int>("Balance")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Partnumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("AccumulateStockLog_ID");
+
+                    b.ToTable("AccumulateStockLogs");
+                });
+
             modelBuilder.Entity("StockMonitoringCommunity.Data.Comport", b =>
                 {
                     b.Property<int>("Channel_ID")
@@ -125,6 +149,55 @@ namespace StockMonitoringCommunity.Migrations
                     b.HasKey("Pattern_ID");
 
                     b.ToTable("InputPatterns");
+                });
+
+            modelBuilder.Entity("StockMonitoringCommunity.Data.MasterStock", b =>
+                {
+                    b.Property<int>("Stock_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Stock_ID"));
+
+                    b.Property<int>("Balance")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<bool>("Invisible")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("LowerLimit")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LowerWarningLimit")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Partnumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("UpperLimit")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UpperWarningLimit")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Stock_ID");
+
+                    b.ToTable("MasterStocks");
                 });
 
             modelBuilder.Entity("StockMonitoringCommunity.Data.ScanInOutTransaction", b =>

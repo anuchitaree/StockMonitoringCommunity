@@ -27,14 +27,45 @@ namespace StockMonitoringCommunity.SubForm
             switch (msg.Key)
             {
                 case "CH1_RAW":
+
+                    var raw = msg.Data?.ToString() != null ? msg.Data?.ToString() : "";
+                    string pattText = string.Empty;
+
+                    Invoke(new Action(() =>
+                    {
+                        pattText = cmbPatt.Text;
+                    }));
+
+                    var (status, pn) = SerialService.FilterPartnumber(raw!, int.Parse(pattText));
+
+                    if (status == false)
+                    {
+                        if (InvokeRequired)
+                        {
+                            Invoke(new Action(() => TbScan.Text = ""));
+                            Invoke(new Action(() => TbResult.Text = ""));
+                        }
+                        else
+                        {
+                            TbScan.Text = "";
+                            TbResult.Text = "";
+                        }
+                        return;
+                    }
+
                     if (InvokeRequired)
                     {
-                        Invoke(new Action(() => TbScan.Text = msg.Data?.ToString()));
+                        Invoke(new Action(() => TbScan.Text = raw));
+                        Invoke(new Action(() => TbResult.Text = pn));
                     }
                     else
                     {
-                        TbScan.Text = msg.Data?.ToString();
+                        TbScan.Text = raw;
+                        TbResult.Text = pn;
                     }
+
+
+
                     break;
                 default:
                     break;
@@ -172,7 +203,7 @@ namespace StockMonitoringCommunity.SubForm
                     var pattern_no = int.Parse(cmbPatt.SelectedItem!.ToString()!);
 
 
-                    TbUq.Text = chkbPattern.Checked==false? "0":TbUq.Text;
+                    TbUq.Text = chkbPattern.Checked == false ? "0" : TbUq.Text;
 
                     var qr = new InputPattern()
                     {
@@ -180,10 +211,10 @@ namespace StockMonitoringCommunity.SubForm
                         TotalOfCharactor = int.Parse(TbTotal.Text),
                         StartCharactor = int.Parse(TbStart.Text),
                         NumberOfCharactor = int.Parse(TbNumber.Text),
-                        ExampleText = TbScan.Text==null? "":TbScan.Text,
+                        ExampleText = TbScan.Text == null ? "" : TbScan.Text,
                         Result = TbResult.Text == null ? "" : TbResult.Text,
                         UniqueStart = int.Parse(TbUq.Text),
-                        UniqueText = TbUnqTxt.Text==null?"": TbUnqTxt.Text
+                        UniqueText = TbUnqTxt.Text == null ? "" : TbUnqTxt.Text
                     };
 
                     var ptn = await db.InputPatterns.Where(x => x.Pattern_ID == pattern_no).FirstOrDefaultAsync();
@@ -208,7 +239,7 @@ namespace StockMonitoringCommunity.SubForm
             }
             catch (Exception ex)
             {
-                var msg =ex.Message;
+                var msg = ex.Message;
                 MessageBox.Show("Save data pattern error", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

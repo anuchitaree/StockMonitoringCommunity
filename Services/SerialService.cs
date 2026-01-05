@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO.Ports;
 using System.Text;
 using System.Text.Json;
-using static System.Windows.Forms.LinkLabel;
 
 namespace StockMonitoringCommunity.Services
 {
@@ -426,7 +425,7 @@ namespace StockMonitoringCommunity.Services
                 buffer1.Clear();
                 serialPort1.DiscardInBuffer();
             }
-            Start();
+            //Start();
         }
 
         private static void DataReceivedHandler2(object sender, SerialDataReceivedEventArgs e)
@@ -657,31 +656,94 @@ namespace StockMonitoringCommunity.Services
         public static void ReadJson()
         {
             Stop();
-            string path = Path.Combine(AppContext.BaseDirectory, "scandata");
 
-            Directory.CreateDirectory(path);
-
-            var list = new List<LogState>();
-
-            foreach (var file in Directory.EnumerateFiles(path, "*.json"))
+            try
             {
-                string json = File.ReadAllText(file);
-                Debug.WriteLine(file);
-
-                var item = JsonSerializer.Deserialize<LogState>(json);
-
-                var pattern = item.Pattern_1;
-               var (sucess,partnumer) = FilterPartnumber(item.Raw, item.Pattern_1);
 
 
+                string path = Path.Combine(AppContext.BaseDirectory, "scandata");
+                string backup_path = Path.Combine(AppContext.BaseDirectory, "backup");
+                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(backup_path);
+
+                var list = new List<ScanInOutTransaction>();
+
+                var files = Directory.EnumerateFiles(path, "*.json");
+                foreach (var file in files)
+                {
+                    string json = File.ReadAllText(file);
+                    Debug.WriteLine(file);
+
+                    var item = JsonSerializer.Deserialize<LogState>(json);
+
+                    (bool sucess, string partnumer) result;
+
+                    if (item != null)
+                    {
+                        if (item.Pattern_1 != 0)
+                        {
+                            result = FilterPartnumber(item.Raw, item.Pattern_1);
+                            item.Partnumber = result.sucess == true ? result.partnumer : "";
+                        }
+                        else if (item.Pattern_2 != 0)
+                        {
+                            result = FilterPartnumber(item.Raw, item.Pattern_2);
+                            item.Partnumber = result.sucess == true ? result.partnumer : "";
+                        }
+                        else if (item.Pattern_3 != 0)
+                        {
+                            result = FilterPartnumber(item.Raw, item.Pattern_3);
+                            item.Partnumber = result.sucess == true ? result.partnumer : "";
+                        }
+                        else if (item.Pattern_4 != 0)
+                        {
+                            result = FilterPartnumber(item.Raw, item.Pattern_4);
+                            item.Partnumber = result.sucess == true ? result.partnumer : "";
+                        }
+                        else if (item.Pattern_5 != 0)
+                        {
+                            result = FilterPartnumber(item.Raw, item.Pattern_5);
+                            item.Partnumber = result.sucess == true ? result.partnumer : "";
+                        }
+                        else if (item.Pattern_6 != 0)
+                        {
+                            result = FilterPartnumber(item.Raw, item.Pattern_6);
+                            item.Partnumber = result.sucess == true ? result.partnumer : "";
+                        }
+
+                        list.Add(new ScanInOutTransaction
+                        {
+                            Channel = item.Channel,
+                            Direction = item.Direction,
+                            Raw = item.Raw,
+                            Partnumber = item.Partnumber,
+                            CreatedAt = item.Datetime.ToUniversalTime(),
+                            IsProcessed = false
+                        });
+                    }
+                }
+                using (var db = new AppDbContext())
+                {
+                    db.ScanInOutTransactions.AddRange(list);
+                    db.SaveChanges();
+                }
+                foreach (var file in files)
+                {
+                    string destFile = Path.Combine(
+                        backup_path,
+                        Path.GetFileName(file));
+
+                    File.Move(file, destFile, overwrite: true);
 
 
 
+                }
 
-                list.Add(item!);
             }
+            catch
+            {
 
-
+            }
 
             //if (!File.Exists(path))
             //    return default;
@@ -691,7 +753,7 @@ namespace StockMonitoringCommunity.Services
             Start();
         }
 
-        private static (bool success, string partnumer) FilterPartnumber(string rawData, int pattern)
+        public static (bool success, string partnumer) FilterPartnumber(string rawData, int pattern)
         {
             try
             {
@@ -701,16 +763,16 @@ namespace StockMonitoringCommunity.Services
                         var case1 = Parameter.InputPatternList.Where(x => x.Pattern_ID == 1).FirstOrDefault();
                         if (case1 != null)
                         {
-                            int start1 = case1.StartCharactor - 1;
+                            int start1 = case1.StartCharactor;
                             int length1 = case1.NumberOfCharactor;
                             if (rawData.Length >= start1 + length1)
                             {
-                                return (true , rawData.Substring(start1, length1));
+                                return (true, rawData.Substring(start1, length1));
                             }
                         }
-                        return (false,"");
+                        return (false, "");
                     case 2:
-                        return (false,"");
+                        return (false, "");
                     default:
                         return (false, "");
                 }

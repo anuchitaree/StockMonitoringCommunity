@@ -354,10 +354,10 @@ namespace StockMonitoringCommunity.SubForm
             // 
             // txtLastedit
             // 
-            txtLastedit.Location = new Point(302, 260);
+            txtLastedit.Location = new Point(325, 260);
             txtLastedit.Name = "txtLastedit";
             txtLastedit.ReadOnly = true;
-            txtLastedit.Size = new Size(153, 23);
+            txtLastedit.Size = new Size(130, 23);
             txtLastedit.TabIndex = 3;
             // 
             // cmbPatt4
