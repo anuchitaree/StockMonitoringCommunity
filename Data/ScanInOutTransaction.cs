@@ -10,7 +10,10 @@ namespace StockMonitoringCommunity.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int ScanInOutTransaction_Id { get; set; }
+
+        [Required,MaxLength(50)]
+        public string StoreId { get; set; } = "";
 
         public int Channel { get; set; } = 0;
 

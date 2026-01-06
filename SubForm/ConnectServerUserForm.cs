@@ -14,5 +14,20 @@ namespace StockMonitoringCommunity.SubForm
         {
             InitializeComponent();
         }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConnectServerUserForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

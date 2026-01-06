@@ -636,7 +636,7 @@ namespace StockMonitoringCommunity.Services
                 callback: DoWork,
                 state: null,
                 dueTime: TimeSpan.Zero,
-                period: TimeSpan.FromMilliseconds(500)
+                period: TimeSpan.FromMilliseconds(5000)
             );
         }
         private static void DoWork(object? state)

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StockMonitoringCommunity.Data;
@@ -11,9 +12,11 @@ using StockMonitoringCommunity.Data;
 namespace StockMonitoringCommunity.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260106082542_9_packaging_table")]
+    partial class _9_packaging_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,11 +156,11 @@ namespace StockMonitoringCommunity.Migrations
 
             modelBuilder.Entity("StockMonitoringCommunity.Data.MasterStock", b =>
                 {
-                    b.Property<int>("MasterStock_Id")
+                    b.Property<int>("Stock_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MasterStock_Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Stock_ID"));
 
                     b.Property<int>("Balance")
                         .HasColumnType("integer");
@@ -199,52 +202,49 @@ namespace StockMonitoringCommunity.Migrations
                     b.Property<int>("UpperWarningLimit")
                         .HasColumnType("integer");
 
-                    b.HasKey("MasterStock_Id");
+                    b.HasKey("Stock_ID");
 
                     b.ToTable("MasterStocks");
                 });
 
             modelBuilder.Entity("StockMonitoringCommunity.Data.Packaging", b =>
                 {
-                    b.Property<int>("Packaging_Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Packaging_Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Channel")
                         .HasColumnType("integer");
 
                     b.Property<string>("Direction")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Partnumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<int>("PerScantimes")
                         .HasColumnType("integer");
 
                     b.Property<string>("StoreID")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
-                    b.HasKey("Packaging_Id");
+                    b.HasKey("Id");
 
                     b.ToTable("Packagings");
                 });
 
             modelBuilder.Entity("StockMonitoringCommunity.Data.ScanInOutTransaction", b =>
                 {
-                    b.Property<int>("ScanInOutTransaction_Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ScanInOutTransaction_Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Channel")
                         .HasColumnType("integer");
@@ -269,12 +269,7 @@ namespace StockMonitoringCommunity.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<string>("StoreId")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("ScanInOutTransaction_Id");
+                    b.HasKey("Id");
 
                     b.ToTable("ScanInOutTransactions");
                 });

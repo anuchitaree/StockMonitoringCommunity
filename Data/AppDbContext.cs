@@ -20,7 +20,7 @@ namespace StockMonitoringCommunity.Data
         public DbSet<MasterStock> MasterStocks => Set<MasterStock>();
         public DbSet<AccumulateStockLog> AccumulateStockLogs => Set<AccumulateStockLog>();
 
-
+        public DbSet<Packaging> Packagings => Set<Packaging>();
 
 
 

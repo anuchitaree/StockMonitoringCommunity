@@ -38,6 +38,9 @@
             partnumberAddEditToolStripMenuItem = new ToolStripMenuItem();
             utilityToolStripMenuItem = new ToolStripMenuItem();
             serialCOMPortMonitorToolStripMenuItem = new ToolStripMenuItem();
+            stockTransactionToolStripMenuItem = new ToolStripMenuItem();
+            stockAccumulationToolStripMenuItem = new ToolStripMenuItem();
+            stockChartToolStripMenuItem = new ToolStripMenuItem();
             runToolStripMenuItem = new ToolStripMenuItem();
             startToolStripMenuItem = new ToolStripMenuItem();
             stopToolStripMenuItem = new ToolStripMenuItem();
@@ -57,7 +60,6 @@
             textBox1 = new TextBox();
             button1 = new Button();
             lbProcess = new Label();
-            button7 = new Button();
             menuStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -68,7 +70,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, settingToolStripMenuItem, utilityToolStripMenuItem, runToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(836, 24);
+            menuStrip1.Size = new Size(1144, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -123,7 +125,7 @@
             // 
             // utilityToolStripMenuItem
             // 
-            utilityToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { serialCOMPortMonitorToolStripMenuItem });
+            utilityToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { serialCOMPortMonitorToolStripMenuItem, stockTransactionToolStripMenuItem, stockAccumulationToolStripMenuItem, stockChartToolStripMenuItem });
             utilityToolStripMenuItem.Name = "utilityToolStripMenuItem";
             utilityToolStripMenuItem.Size = new Size(50, 20);
             utilityToolStripMenuItem.Text = "Utility";
@@ -134,6 +136,27 @@
             serialCOMPortMonitorToolStripMenuItem.Size = new Size(204, 22);
             serialCOMPortMonitorToolStripMenuItem.Text = "Serial COM port monitor";
             serialCOMPortMonitorToolStripMenuItem.Click += serialCOMPortMonitorToolStripMenuItem_Click;
+            // 
+            // stockTransactionToolStripMenuItem
+            // 
+            stockTransactionToolStripMenuItem.Name = "stockTransactionToolStripMenuItem";
+            stockTransactionToolStripMenuItem.Size = new Size(204, 22);
+            stockTransactionToolStripMenuItem.Text = "Stock transaction";
+            stockTransactionToolStripMenuItem.Click += stockTransactionToolStripMenuItem_Click;
+            // 
+            // stockAccumulationToolStripMenuItem
+            // 
+            stockAccumulationToolStripMenuItem.Name = "stockAccumulationToolStripMenuItem";
+            stockAccumulationToolStripMenuItem.Size = new Size(204, 22);
+            stockAccumulationToolStripMenuItem.Text = "Stock accumulation";
+            stockAccumulationToolStripMenuItem.Click += stockAccumulationToolStripMenuItem_Click;
+            // 
+            // stockChartToolStripMenuItem
+            // 
+            stockChartToolStripMenuItem.Name = "stockChartToolStripMenuItem";
+            stockChartToolStripMenuItem.Size = new Size(204, 22);
+            stockChartToolStripMenuItem.Text = "Stock chart";
+            stockChartToolStripMenuItem.Click += stockChartToolStripMenuItem_Click;
             // 
             // runToolStripMenuItem
             // 
@@ -159,27 +182,26 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.6315784F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.36842F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 230F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(panelMain, 1, 1);
             tableLayoutPanel1.Controls.Add(panel2, 0, 1);
             tableLayoutPanel1.Controls.Add(lbProcess, 0, 0);
-            tableLayoutPanel1.Controls.Add(button7, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 24);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(836, 630);
+            tableLayoutPanel1.Size = new Size(1144, 630);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // panelMain
             // 
             panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(234, 23);
+            panelMain.Location = new Point(233, 23);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(599, 604);
+            panelMain.Size = new Size(908, 604);
             panelMain.TabIndex = 0;
             // 
             // panel2
@@ -199,7 +221,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(3, 23);
             panel2.Name = "panel2";
-            panel2.Size = new Size(225, 604);
+            panel2.Size = new Size(224, 604);
             panel2.TabIndex = 1;
             // 
             // textBox6
@@ -305,26 +327,16 @@
             lbProcess.Dock = DockStyle.Fill;
             lbProcess.Location = new Point(3, 0);
             lbProcess.Name = "lbProcess";
-            lbProcess.Size = new Size(225, 20);
+            lbProcess.Size = new Size(224, 20);
             lbProcess.TabIndex = 2;
             lbProcess.Text = "Stop ";
             lbProcess.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // button7
-            // 
-            button7.Location = new Point(234, 3);
-            button7.Name = "button7";
-            button7.Size = new Size(10, 14);
-            button7.TabIndex = 3;
-            button7.Text = "button7";
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += button7_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(836, 654);
+            ClientSize = new Size(1144, 654);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -371,7 +383,9 @@
         private ToolStripMenuItem startToolStripMenuItem;
         private ToolStripMenuItem stopToolStripMenuItem;
         private Label lbProcess;
-        private Button button7;
         private ToolStripMenuItem partnumberAddEditToolStripMenuItem;
+        private ToolStripMenuItem stockTransactionToolStripMenuItem;
+        private ToolStripMenuItem stockAccumulationToolStripMenuItem;
+        private ToolStripMenuItem stockChartToolStripMenuItem;
     }
 }

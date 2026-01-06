@@ -7,6 +7,7 @@ namespace StockMonitoringCommunity.SubForm
     public partial class MasterPartnumberUserControl : UserControl
     {
         private List<MasterStock> _masterStock = new();
+        private int _uuid = 0;
         public MasterPartnumberUserControl()
         {
             InitializeComponent();
@@ -22,16 +23,7 @@ namespace StockMonitoringCommunity.SubForm
 
         }
 
-        private void ReadPartnumberFromTable()
-        {
-            int row = dataGridView1.RowCount;
-            //txtPartnumber.Text = dataGridView1.Row;
-
-            if (row > 0)
-            {
-                var getdata = (MasterStock)dataGridView1.CurrentRow?.DataBoundItem!;
-            }
-        }
+        
 
         private async void SavePartnumberToTable()
         {
@@ -92,7 +84,7 @@ namespace StockMonitoringCommunity.SubForm
                         MessageBox.Show("Save new partnumber completed", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-
+                ReadMasterPartnumber();
             }
             catch
             {
@@ -102,7 +94,7 @@ namespace StockMonitoringCommunity.SubForm
         }
         private void MasterPartnumberUserControl_Load(object sender, EventArgs e)
         {
-            string[] head = new string[] { "No", "Partnumber", "Description", "Location", "Balance", "HH", "HL", "LH", "LL", "Show" };
+            string[] head = new string[] { "No", "Partnumber", "Description", "Location", "Balance", "HH", "HL", "LH", "LL", "NotShow" };
             string[] property = new string[] { "Stock_ID", "Partnumber", "Description", "Location", "Balance", "UpperLimit", "UpperWarningLimit", "LowerWarningLimit", "LowerLimit", "Invisible" };
             int[] width = new int[] { 30, 100, 150, 100, 50, 50, 50, 50, 50, 50 };
             InitialDatagridview.Pattern_1(head, property, width, dataGridView1);
@@ -110,41 +102,137 @@ namespace StockMonitoringCommunity.SubForm
 
         }
 
-        private async void btnClearn_Click(object sender, EventArgs e)
+
+        private void btnRead_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var pn = txtPartnumber.Text.Trim();
-
-                using (var db = new AppDbContext())
-                {
-                    var has = await db.MasterStocks.Where(p => p.Partnumber == pn).ToListAsync();
-
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            ReadMasterPartnumber();
         }
 
-        private async void btnRead_Click(object sender, EventArgs e)
+        private async void ReadMasterPartnumber()
         {
             try
             {
-                var pn = txtPartnumber.Text.Trim();
-
                 using (var db = new AppDbContext())
                 {
                     _masterStock = await db.MasterStocks.ToListAsync();
                     dataGridView1.DataSource = _masterStock;
                 }
             }
-            catch (Exception)
+            catch
             {
 
-                throw;
+                MessageBox.Show("Error", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int row = dataGridView1.CurrentRow!.Index;
+                _uuid = int.Parse(dataGridView1.Rows[row].Cells["No"].Value!.ToString()!);
+                txtPartnumber.Text = dataGridView1.Rows[row].Cells["Partnumber"].Value!.ToString()!;
+                txtDescription.Text = dataGridView1.Rows[row].Cells["Description"].Value!.ToString()!;
+                txtLocation.Text = dataGridView1.Rows[row].Cells["Location"].Value!.ToString()!;
+                txtBalance.Text = dataGridView1.Rows[row].Cells["Balance"].Value!.ToString()!;
+                txtUpperlimit.Text = dataGridView1.Rows[row].Cells["HH"].Value!.ToString()!;
+                txtUpwarning.Text = dataGridView1.Rows[row].Cells["HL"].Value!.ToString()!;
+                txtLowarning.Text = dataGridView1.Rows[row].Cells["LH"].Value!.ToString()!;
+                txtLowerlimit.Text = dataGridView1.Rows[row].Cells["LL"].Value!.ToString()!;
+                chkInvisible.Checked = dataGridView1.Rows[row].Cells["NotShow"].Value!.ToString() == "True" ? true : false;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void SearchMasterPartnumber()
+        {
+            try
+            {
+                var pn = txtPartnumber.Text.Trim();
+                using (var db = new AppDbContext())
+                {
+                    var masters = await db.MasterStocks.Where(x => x.Partnumber == pn).ToListAsync();
+                    if (masters.Count == 0)
+                    {
+                        txtDescription.Text = txtLocation.Text = txtBalance.Text = txtUpperlimit.Text = string.Empty;
+                        txtUpwarning.Text = txtLowarning.Text = txtLowerlimit.Text = string.Empty;
+                        chkInvisible.Checked = false;
+                        MessageBox.Show("No data found", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (masters.Count > 1)
+                    {
+                        var info = $"You have {masters.Count} records that same partnumber";
+                        MessageBox.Show(info, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (masters.Count == 1)
+                    {
+                        var master = masters.FirstOrDefault();
+                        txtPartnumber.Text = master!.Partnumber;
+                        txtDescription.Text = master.Description;
+                        txtLocation.Text = master.Location;
+                        txtBalance.Text = master.Balance.ToString();
+                        txtUpperlimit.Text = master.UpperLimit.ToString();
+                        txtUpwarning.Text = master.UpperWarningLimit.ToString();
+                        txtLowarning.Text = master.LowerWarningLimit.ToString();
+                        txtLowerlimit.Text = master.LowerLimit.ToString();
+                        chkInvisible.Checked = master.Invisible;
+                    }
+                }
+            }
+            catch
+            {
+
+                MessageBox.Show("Error", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRead1_Click(object sender, EventArgs e)
+        {
+            SearchMasterPartnumber();
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            DeleteMasterPartnumber();
+        }
+        private void DeleteMasterPartnumber()
+        {
+            try
+            {
+                var pn = txtPartnumber.Text.Trim();
+                using (var db = new AppDbContext())
+                {
+                    var masters = db.MasterStocks.Where(x => x.Partnumber == pn).ToList();
+                    if (masters.Count == 0)
+                    {
+                        MessageBox.Show("No data found", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (masters.Count > 1)
+                    {
+                        var master = masters.FirstOrDefault(x=>x.MasterStock_Id == _uuid);
+                        if (master != null)
+                        {
+                            db.MasterStocks.Remove(master);
+                            db.SaveChanges();
+                            MessageBox.Show("Delete completed", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+                    }
+                    else if (masters.Count == 1)
+                    {
+                        var info = $"You have {masters.Count} record.";
+                        MessageBox.Show(info, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                ReadMasterPartnumber();
+            }
+            catch
+            {
+                MessageBox.Show("Error", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

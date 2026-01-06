@@ -7,6 +7,7 @@ using StockMonitoringCommunity.Services;
 using StockMonitoringCommunity.State;
 using StockMonitoringCommunity.SubForm;
 using System.IO.Ports;
+using System.Windows.Forms;
 
 namespace StockMonitoringCommunity
 {
@@ -17,6 +18,13 @@ namespace StockMonitoringCommunity
         private ConnectServerUserForm _connectServerUserForm;
         private InputMonitorUserForm _inputMonitorUserForm;
         private MasterPartnumberUserControl _masterPartnumberUserControl;
+        private StockTransactionUserControl _stockTransactionUserControl;
+        private StockAccumulationUserControl _stockAccumulationUserControl;
+        private StockChartUserControl _stockChartUserControl;
+
+        private readonly PeriodicWorker _worker =
+         new PeriodicWorker(TimeSpan.FromSeconds(10));
+
         private bool _isStarted = false;
 
         public MainForm()
@@ -27,7 +35,10 @@ namespace StockMonitoringCommunity
             _inputPatternUserForm = new InputPatternUserForm();
             _connectServerUserForm = new ConnectServerUserForm();
             _inputMonitorUserForm = new InputMonitorUserForm();
-            _masterPartnumberUserControl= new MasterPartnumberUserControl();
+            _masterPartnumberUserControl = new MasterPartnumberUserControl();
+            _stockTransactionUserControl = new StockTransactionUserControl();
+            _stockAccumulationUserControl = new StockAccumulationUserControl();
+            _stockChartUserControl = new StockChartUserControl();
 
             UiEventBus.MessagePublished += OnMessage;
             UiEventBus.MessagePublishedTranscation += OnMessageTranscation;
@@ -92,7 +103,35 @@ namespace StockMonitoringCommunity
             panelMain.Controls.Clear();
             panelMain.Controls.Add(_masterPartnumberUserControl);
         }
+        private void stockTransactionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _stockTransactionUserControl = new StockTransactionUserControl
+            {
+                Dock = DockStyle.Fill
+            };
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(_stockTransactionUserControl);
+        }
 
+        private void stockAccumulationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _stockAccumulationUserControl = new StockAccumulationUserControl
+            {
+                Dock = DockStyle.Fill
+            };
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(_stockAccumulationUserControl);
+        }
+
+        private void stockChartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _stockChartUserControl = new StockChartUserControl
+            {
+                Dock = DockStyle.Fill
+            };
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(_stockChartUserControl);
+        }
         #endregion
 
 
@@ -365,10 +404,10 @@ namespace StockMonitoringCommunity
                         break;
                 }
             }
-            catch 
+            catch
             {
 
-              
+
             }
 
         }
@@ -399,7 +438,7 @@ namespace StockMonitoringCommunity
             UiEventBus.MessagePublished -= OnMessage;
             StateStore.StateChanged -= OnStateChanged;
 
-
+            _worker.Stop();
             base.OnFormClosed(e); // ✅ ถูกที่ ถูกเวลา
         }
 
@@ -409,10 +448,11 @@ namespace StockMonitoringCommunity
 
 
         #region Menu Event
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _isStarted = true;
 
+            await _worker.StartAsync(LoadDataAsync);
 
             StateStore.Update(state =>
             {
@@ -424,6 +464,7 @@ namespace StockMonitoringCommunity
         {
             _isStarted = false;
 
+            _worker.Stop();
 
             StateStore.Update(state =>
             {
@@ -443,9 +484,32 @@ namespace StockMonitoringCommunity
 
         #endregion
 
-        private void button7_Click(object sender, EventArgs e)
+        private async Task LoadDataAsync()
         {
-            //SerialService.ReadJson();
+            var data = await Task.Run(() =>
+            {
+                using (var db = new AppDbContext())
+                {
+
+                    List<ScanInOutTransaction> transactions = db.ScanInOutTransactions.Where(x => x.IsProcessed == false)
+                    .OrderBy(x=>x.CreatedAt).ToList();
+                         
+
+
+
+
+
+                return db.ScanInOutTransactions
+                         .OrderByDescending(x => x.CreatedAt)
+                         .ToList();
+                }
+            });
+
+            //Invoke(() =>
+            //{
+
+            //    dataGridView1.DataSource = data;
+            //});
         }
 
        

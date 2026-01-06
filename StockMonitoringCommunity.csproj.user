@@ -31,5 +31,14 @@
     <Compile Update="SubForm\InputPatternUserForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="SubForm\StockAccumulationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\StockChartUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="SubForm\StockTransactionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

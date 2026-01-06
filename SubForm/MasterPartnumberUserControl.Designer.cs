@@ -46,10 +46,11 @@
             btnSave = new Button();
             dataGridView1 = new DataGridView();
             txtPartnumber = new TextBox();
-            btnClearn = new Button();
             label9 = new Label();
             chkInvisible = new CheckBox();
             btnRead = new Button();
+            btnRead1 = new Button();
+            btnDel = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -195,6 +196,7 @@
             dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(458, 255);
             dataGridView1.TabIndex = 7;
+            dataGridView1.DoubleClick += dataGridView1_DoubleClick;
             // 
             // txtPartnumber
             // 
@@ -202,16 +204,6 @@
             txtPartnumber.Name = "txtPartnumber";
             txtPartnumber.Size = new Size(197, 23);
             txtPartnumber.TabIndex = 5;
-            // 
-            // btnClearn
-            // 
-            btnClearn.Location = new Point(326, 21);
-            btnClearn.Name = "btnClearn";
-            btnClearn.Size = new Size(75, 23);
-            btnClearn.TabIndex = 8;
-            btnClearn.Text = "Clearn";
-            btnClearn.UseVisualStyleBackColor = true;
-            btnClearn.Click += btnClearn_Click;
             // 
             // label9
             // 
@@ -238,17 +230,38 @@
             btnRead.Name = "btnRead";
             btnRead.Size = new Size(111, 53);
             btnRead.TabIndex = 10;
-            btnRead.Text = "Read";
+            btnRead.Text = "Read All";
             btnRead.UseVisualStyleBackColor = true;
             btnRead.Click += btnRead_Click;
+            // 
+            // btnRead1
+            // 
+            btnRead1.Location = new Point(336, 57);
+            btnRead1.Name = "btnRead1";
+            btnRead1.Size = new Size(75, 23);
+            btnRead1.TabIndex = 11;
+            btnRead1.Text = "Read";
+            btnRead1.UseVisualStyleBackColor = true;
+            btnRead1.Click += btnRead1_Click;
+            // 
+            // btnDel
+            // 
+            btnDel.Location = new Point(338, 24);
+            btnDel.Name = "btnDel";
+            btnDel.Size = new Size(75, 23);
+            btnDel.TabIndex = 12;
+            btnDel.Text = "Delete";
+            btnDel.UseVisualStyleBackColor = true;
+            btnDel.Click += btnDel_Click;
             // 
             // MasterPartnumberUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnDel);
+            Controls.Add(btnRead1);
             Controls.Add(btnRead);
             Controls.Add(chkInvisible);
-            Controls.Add(btnClearn);
             Controls.Add(dataGridView1);
             Controls.Add(btnSave);
             Controls.Add(txtLowerlimit);
@@ -297,9 +310,10 @@
         private Button btnSave;
         private DataGridView dataGridView1;
         private TextBox txtPartnumber;
-        private Button btnClearn;
         private Label label9;
         private CheckBox chkInvisible;
         private Button btnRead;
+        private Button btnRead1;
+        private Button btnDel;
     }
 }

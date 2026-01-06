@@ -31,11 +31,13 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            label4 = new Label();
-            bntSave = new Button();
+            lbResult = new Label();
+            btnSave = new Button();
             btnTest = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
+            comboBox1 = new ComboBox();
+            label5 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -50,7 +52,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 58);
+            label2.Location = new Point(25, 67);
             label2.Name = "label2";
             label2.Size = new Size(100, 15);
             label2.TabIndex = 0;
@@ -59,67 +61,91 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(25, 134);
+            label3.Location = new Point(257, 67);
             label3.Name = "label3";
             label3.Size = new Size(74, 15);
             label3.TabIndex = 0;
             label3.Text = "Port number";
             // 
-            // label4
+            // lbResult
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(143, 206);
-            label4.Name = "label4";
-            label4.Size = new Size(39, 15);
-            label4.TabIndex = 0;
-            label4.Text = "Result";
+            lbResult.AutoSize = true;
+            lbResult.Location = new Point(124, 131);
+            lbResult.Name = "lbResult";
+            lbResult.Size = new Size(39, 15);
+            lbResult.TabIndex = 0;
+            lbResult.Text = "Result";
             // 
-            // bntSave
+            // btnSave
             // 
-            bntSave.Location = new Point(327, 153);
-            bntSave.Name = "bntSave";
-            bntSave.Size = new Size(75, 23);
-            bntSave.TabIndex = 1;
-            bntSave.Text = "Save";
-            bntSave.UseVisualStyleBackColor = true;
+            btnSave.Location = new Point(311, 186);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(75, 23);
+            btnSave.TabIndex = 1;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnTest
             // 
-            btnTest.Location = new Point(327, 206);
+            btnTest.Location = new Point(311, 123);
             btnTest.Name = "btnTest";
             btnTest.Size = new Size(75, 23);
             btnTest.TabIndex = 1;
             btnTest.Text = "Test Connection";
             btnTest.UseVisualStyleBackColor = true;
+            btnTest.Click += btnTest_Click;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(37, 88);
+            textBox1.Location = new Point(14, 85);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(310, 23);
+            textBox1.PlaceholderText = "127.0.0.1";
+            textBox1.Size = new Size(237, 23);
             textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(14, 154);
+            textBox2.Location = new Point(257, 85);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(310, 23);
+            textBox2.PlaceholderText = "5060";
+            textBox2.Size = new Size(129, 23);
             textBox2.TabIndex = 2;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(25, 186);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(254, 23);
+            comboBox1.TabIndex = 3;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(25, 168);
+            label5.Name = "label5";
+            label5.Size = new Size(47, 15);
+            label5.TabIndex = 0;
+            label5.Text = "Store Id";
             // 
             // ConnectServerUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(comboBox1);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(btnTest);
-            Controls.Add(bntSave);
-            Controls.Add(label4);
+            Controls.Add(btnSave);
+            Controls.Add(lbResult);
             Controls.Add(label3);
+            Controls.Add(label5);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "ConnectServerUserForm";
             Size = new Size(432, 305);
+            Load += ConnectServerUserForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -129,10 +155,12 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private Label label4;
-        private Button bntSave;
+        private Label lbResult;
+        private Button btnSave;
         private Button btnTest;
         private TextBox textBox1;
         private TextBox textBox2;
+        private ComboBox comboBox1;
+        private Label label5;
     }
 }
