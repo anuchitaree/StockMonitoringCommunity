@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pcsGtCsoAOA=",
+  "dgSpecHash": "7mE1ASgytbw=",
   "success": true,
   "projectFilePath": "D:\\Project\\StockMonitoringCommunity\\StockMonitoringCommunity.csproj",
   "expectedPackageFiles": [
@@ -60,6 +60,7 @@
     "C:\\Users\\Anuchit-dev\\.nuget\\packages\\system.composition.runtime\\9.0.0\\system.composition.runtime.9.0.0.nupkg.sha512",
     "C:\\Users\\Anuchit-dev\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512",
     "C:\\Users\\Anuchit-dev\\.nuget\\packages\\system.io.ports\\10.0.1\\system.io.ports.10.0.1.nupkg.sha512",
+    "C:\\Users\\Anuchit-dev\\.nuget\\packages\\system.management\\10.0.1\\system.management.10.0.1.nupkg.sha512",
     "C:\\Users\\Anuchit-dev\\.nuget\\packages\\system.reflection.metadataloadcontext\\7.0.0\\system.reflection.metadataloadcontext.7.0.0.nupkg.sha512"
   ],
   "logs": []

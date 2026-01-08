@@ -40,5 +40,8 @@
     <Compile Update="SubForm\StockTransactionUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="SubForm\StoreUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

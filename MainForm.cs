@@ -21,7 +21,7 @@ namespace StockMonitoringCommunity
         private StockTransactionUserControl _stockTransactionUserControl;
         private StockAccumulationUserControl _stockAccumulationUserControl;
         private StockChartUserControl _stockChartUserControl;
-
+        private StoreUserControl _storeUserControl;
         private readonly PeriodicWorker _worker =
          new PeriodicWorker(TimeSpan.FromSeconds(10));
 
@@ -39,6 +39,7 @@ namespace StockMonitoringCommunity
             _stockTransactionUserControl = new StockTransactionUserControl();
             _stockAccumulationUserControl = new StockAccumulationUserControl();
             _stockChartUserControl = new StockChartUserControl();
+            _storeUserControl = new StoreUserControl();
 
             UiEventBus.MessagePublished += OnMessage;
             UiEventBus.MessagePublishedTranscation += OnMessageTranscation;
@@ -132,6 +133,17 @@ namespace StockMonitoringCommunity
             panelMain.Controls.Clear();
             panelMain.Controls.Add(_stockChartUserControl);
         }
+
+        private void storeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _storeUserControl = new StoreUserControl
+            {
+                Dock = DockStyle.Fill
+            };
+            panelMain.Controls.Clear();
+            panelMain.Controls.Add(_storeUserControl);
+        }
+
         #endregion
 
 
@@ -492,16 +504,16 @@ namespace StockMonitoringCommunity
                 {
 
                     List<ScanInOutTransaction> transactions = db.ScanInOutTransactions.Where(x => x.IsProcessed == false)
-                    .OrderBy(x=>x.CreatedAt).ToList();
-                         
+                    .OrderBy(x => x.CreatedAt).ToList();
 
 
 
 
 
-                return db.ScanInOutTransactions
-                         .OrderByDescending(x => x.CreatedAt)
-                         .ToList();
+
+                    return db.ScanInOutTransactions
+                             .OrderByDescending(x => x.CreatedAt)
+                             .ToList();
                 }
             });
 

@@ -34,10 +34,10 @@
             lbResult = new Label();
             btnSave = new Button();
             btnTest = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            comboBox1 = new ComboBox();
+            cmbStore = new ComboBox();
             label5 = new Label();
+            txtIP = new TextBox();
+            txtPort = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -96,29 +96,13 @@
             btnTest.UseVisualStyleBackColor = true;
             btnTest.Click += btnTest_Click;
             // 
-            // textBox1
+            // cmbStore
             // 
-            textBox1.Location = new Point(14, 85);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "127.0.0.1";
-            textBox1.Size = new Size(237, 23);
-            textBox1.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(257, 85);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "5060";
-            textBox2.Size = new Size(129, 23);
-            textBox2.TabIndex = 2;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(25, 186);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(254, 23);
-            comboBox1.TabIndex = 3;
+            cmbStore.FormattingEnabled = true;
+            cmbStore.Location = new Point(25, 186);
+            cmbStore.Name = "cmbStore";
+            cmbStore.Size = new Size(254, 23);
+            cmbStore.TabIndex = 3;
             // 
             // label5
             // 
@@ -129,13 +113,27 @@
             label5.TabIndex = 0;
             label5.Text = "Store Id";
             // 
+            // txtIP
+            // 
+            txtIP.Location = new Point(27, 89);
+            txtIP.Name = "txtIP";
+            txtIP.Size = new Size(159, 23);
+            txtIP.TabIndex = 4;
+            // 
+            // txtPort
+            // 
+            txtPort.Location = new Point(227, 89);
+            txtPort.Name = "txtPort";
+            txtPort.Size = new Size(159, 23);
+            txtPort.TabIndex = 4;
+            // 
             // ConnectServerUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(comboBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtPort);
+            Controls.Add(txtIP);
+            Controls.Add(cmbStore);
             Controls.Add(btnTest);
             Controls.Add(btnSave);
             Controls.Add(lbResult);
@@ -160,7 +158,9 @@
         private Button btnTest;
         private TextBox textBox1;
         private TextBox textBox2;
-        private ComboBox comboBox1;
+        private ComboBox cmbStore;
         private Label label5;
+        private TextBox txtIP;
+        private TextBox txtPort;
     }
 }

@@ -60,6 +60,7 @@
             textBox1 = new TextBox();
             button1 = new Button();
             lbProcess = new Label();
+            storeToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -90,7 +91,7 @@
             // 
             // settingToolStripMenuItem
             // 
-            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { serialCOMPortToolStripMenuItem, inputPatternToolStripMenuItem, connectionToServerToolStripMenuItem, partnumberAddEditToolStripMenuItem });
+            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { serialCOMPortToolStripMenuItem, inputPatternToolStripMenuItem, connectionToServerToolStripMenuItem, partnumberAddEditToolStripMenuItem, storeToolStripMenuItem });
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             settingToolStripMenuItem.Size = new Size(56, 20);
             settingToolStripMenuItem.Text = "Setting";
@@ -332,6 +333,13 @@
             lbProcess.Text = "Stop ";
             lbProcess.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // storeToolStripMenuItem
+            // 
+            storeToolStripMenuItem.Name = "storeToolStripMenuItem";
+            storeToolStripMenuItem.Size = new Size(186, 22);
+            storeToolStripMenuItem.Text = "Store";
+            storeToolStripMenuItem.Click += storeToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -387,5 +395,6 @@
         private ToolStripMenuItem stockTransactionToolStripMenuItem;
         private ToolStripMenuItem stockAccumulationToolStripMenuItem;
         private ToolStripMenuItem stockChartToolStripMenuItem;
+        private ToolStripMenuItem storeToolStripMenuItem;
     }
 }

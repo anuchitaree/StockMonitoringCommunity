@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockMonitoringCommunity.Classes;
 using StockMonitoringCommunity.Data;
+using StockMonitoringCommunity.Models;
 
 namespace StockMonitoringCommunity.SubForm
 {
@@ -23,13 +24,14 @@ namespace StockMonitoringCommunity.SubForm
 
         }
 
-        
+
 
         private async void SavePartnumberToTable()
         {
             try
             {
 
+                var storeID = cmbStore.SelectedItem?.ToString() ?? "";
 
                 var pn = txtPartnumber.Text.Trim();
                 var description = txtDescription.Text.Trim();
@@ -52,7 +54,7 @@ namespace StockMonitoringCommunity.SubForm
                     else if (has.Count == 1)
                     {
                         var hasone = has.FirstOrDefault();
-
+                        hasone?.StoreID = storeID;
                         hasone?.Description = description;
                         hasone?.Location = location;
                         hasone?.Balance = balance;
@@ -69,6 +71,7 @@ namespace StockMonitoringCommunity.SubForm
                     {
                         await db.MasterStocks.AddAsync(new MasterStock
                         {
+                            StoreID = storeID,
                             Partnumber = pn,
                             Description = description,
                             Location = location,
@@ -94,12 +97,35 @@ namespace StockMonitoringCommunity.SubForm
         }
         private void MasterPartnumberUserControl_Load(object sender, EventArgs e)
         {
-            string[] head = new string[] { "No", "Partnumber", "Description", "Location", "Balance", "HH", "HL", "LH", "LL", "NotShow" };
-            string[] property = new string[] { "Stock_ID", "Partnumber", "Description", "Location", "Balance", "UpperLimit", "UpperWarningLimit", "LowerWarningLimit", "LowerLimit", "Invisible" };
-            int[] width = new int[] { 30, 100, 150, 100, 50, 50, 50, 50, 50, 50 };
+            string[] head = new string[] { "No", "StoreID", "Partnumber", "Description", "Location", "Balance", "HH", "HL", "LH", "LL", "NotShow" };
+            string[] property = new string[] { "MasterStock_Id", "StoreID", "Partnumber", "Description", "Location", "Balance", "UpperLimit", "UpperWarningLimit", "LowerWarningLimit", "LowerLimit", "Invisible" };
+            int[] width = new int[] { 30, 120,100, 150, 100, 50, 50, 50, 50, 50, 50 };
             InitialDatagridview.Pattern_1(head, property, width, dataGridView1);
             dataGridView1.DataSource = _masterStock;
 
+            try
+            {
+                List<ComboboxModel> storelist;
+                using (var db = new AppDbContext())
+                {
+                     storelist = db.Stores.Select(s => new ComboboxModel
+                    {
+                        Text = s.StoreID,
+                        Value = s.Store_Id
+                    }).ToList();
+
+                }
+
+                cmbStore.DataSource = storelist;
+
+                cmbStore.DisplayMember = "Text";
+                cmbStore.ValueMember = "Value";
+                cmbStore.SelectedIndex = -1;
+            }
+            catch
+            {
+
+            }
         }
 
 
@@ -115,6 +141,10 @@ namespace StockMonitoringCommunity.SubForm
                 using (var db = new AppDbContext())
                 {
                     _masterStock = await db.MasterStocks.ToListAsync();
+                    foreach (var item in _masterStock)
+                    {
+                        
+                    }
                     dataGridView1.DataSource = _masterStock;
                 }
             }
@@ -131,6 +161,7 @@ namespace StockMonitoringCommunity.SubForm
             {
                 int row = dataGridView1.CurrentRow!.Index;
                 _uuid = int.Parse(dataGridView1.Rows[row].Cells["No"].Value!.ToString()!);
+
                 txtPartnumber.Text = dataGridView1.Rows[row].Cells["Partnumber"].Value!.ToString()!;
                 txtDescription.Text = dataGridView1.Rows[row].Cells["Description"].Value!.ToString()!;
                 txtLocation.Text = dataGridView1.Rows[row].Cells["Location"].Value!.ToString()!;
@@ -171,6 +202,7 @@ namespace StockMonitoringCommunity.SubForm
                     else if (masters.Count == 1)
                     {
                         var master = masters.FirstOrDefault();
+
                         txtPartnumber.Text = master!.Partnumber;
                         txtDescription.Text = master.Description;
                         txtLocation.Text = master.Location;
@@ -213,7 +245,7 @@ namespace StockMonitoringCommunity.SubForm
                     }
                     else if (masters.Count > 1)
                     {
-                        var master = masters.FirstOrDefault(x=>x.MasterStock_Id == _uuid);
+                        var master = masters.FirstOrDefault(x => x.MasterStock_Id == _uuid);
                         if (master != null)
                         {
                             db.MasterStocks.Remove(master);

@@ -51,6 +51,8 @@
             btnRead = new Button();
             btnRead1 = new Button();
             btnDel = new Button();
+            label10 = new Label();
+            cmbStore = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -75,7 +77,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 77);
+            label3.Location = new Point(12, 80);
             label3.Name = "label3";
             label3.Size = new Size(53, 15);
             label3.TabIndex = 2;
@@ -194,7 +196,7 @@
             dataGridView1.Location = new Point(25, 258);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(458, 255);
+            dataGridView1.Size = new Size(759, 255);
             dataGridView1.TabIndex = 7;
             dataGridView1.DoubleClick += dataGridView1_DoubleClick;
             // 
@@ -254,10 +256,28 @@
             btnDel.UseVisualStyleBackColor = true;
             btnDel.Click += btnDel_Click;
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(482, 205);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 15);
+            label10.TabIndex = 0;
+            label10.Text = "StoreID";
+            // 
+            // cmbStore
+            // 
+            cmbStore.FormattingEnabled = true;
+            cmbStore.Location = new Point(541, 205);
+            cmbStore.Name = "cmbStore";
+            cmbStore.Size = new Size(158, 23);
+            cmbStore.TabIndex = 13;
+            // 
             // MasterPartnumberUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(cmbStore);
             Controls.Add(btnDel);
             Controls.Add(btnRead1);
             Controls.Add(btnRead);
@@ -280,6 +300,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label9);
+            Controls.Add(label10);
             Controls.Add(label1);
             Name = "MasterPartnumberUserControl";
             Size = new Size(835, 541);
@@ -315,5 +336,7 @@
         private Button btnRead;
         private Button btnRead1;
         private Button btnDel;
+        private Label label10;
+        private ComboBox cmbStore;
     }
 }

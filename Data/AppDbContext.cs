@@ -22,7 +22,8 @@ namespace StockMonitoringCommunity.Data
 
         public DbSet<Packaging> Packagings => Set<Packaging>();
 
-
+        public DbSet<ServerConnection> ServerConnections => Set<ServerConnection>();
+        public DbSet<Store> Stores => Set<Store>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
